@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>D3 Test</title>
+
+</head>
+<meta charset="utf-8">
+<style> /* set the CSS */
+
+html, body, #graph {
+    width: 500px;
+    height: 500px;
+}
+
+</style>
+<body>
+<div id="graph"></div>    
+<script type="text/javascript" src="https://d3js.org/d3.v4.js"></script>
+<script>
+
+"use strict"
+
+var width, height
+var chartWidth, chartHeight
+var margin
+var svg = d3.select("#graph").append("svg")
+var chartLayer = svg.append("g").classed("chartLayer", true)
+var node
+
+
+main()
+
+function main() {
+  width = document.querySelector("#graph").clientWidth
+  height = document.querySelector("#graph").clientHeight
+  var nodes = [
+    {name: "Master", size: 2, color: "#0074D9"},
+    {name: "Minion 1", size: 1, color: "#FF851B"},
+    {name: "Minion 2", size: 1, color: "#F012BE"},
+    {name: "Minion 3", size: 1, color: "#2ECC40"},
+    {name: "Minion 4", size: 1, color: "#DDDDDD"},
+    {name: "Minion 5", size: 1, color: "#FFDC00"}
+  ]
+        var range = 100
+        var data = {
+            nodes: nodes.map(function(d){ return {label: d.name, r:d.size, color:d.color }}),
+            links: nodes.slice(0,6).map(function(d, i) {console.log(i);return {source: 0, target: i}})
+        }
+  console.log(data);
+  setSize(data)
+  drawChart(data)    
+}
+
+function setSize(data) {
+  width = document.querySelector("#graph").clientWidth
+  height = document.querySelector("#graph").clientHeight
+
+  margin = {top:0, left:0, bottom:0, right:0 }
+  
+  
+  chartWidth = width - (margin.left+margin.right)
+  chartHeight = height - (margin.top+margin.bottom)
+  
+  svg.attr("width", width).attr("height", height)
+  
+  
+  chartLayer
+      .attr("width", chartWidth)
+      .attr("height", chartHeight)
+      .attr("transform", "translate("+[margin.left, margin.top]+")")
+      
+      
+}
+
+function drawChart(data) {
+  
+  var simulation = d3.forceSimulation()
+      .force("link", d3.forceLink().id(function(d) { return d.index }))
+      .force("collide",d3.forceCollide(function(d) {return d.r * width / 10 }).iterations(16) )
+      .force("charge", d3.forceManyBody())
+      .force("center", d3.forceCenter(chartWidth / 2, chartWidth / 2))
+      .force("y", d3.forceY(0))
+      .force("x", d3.forceX(0))
+
+  var link = svg
+    .append("g")
+      .attr("class", "links")
+      .selectAll("line")
+      .data(data.links)
+      .enter()
+    .append("line")
+      .attr("stroke", "black")
+      .style("stroke-width", 3)
+      
+  
+  node = svg
+    .append("g")
+      .attr("class", "nodes")
+      .selectAll("g")
+      .data(data.nodes)
+      .enter()
+    .append("g");
+
+  var circle = node.append("circle")
+      .attr("r", function(d){  return d.r * width / 50})
+      .style("fill", function (d) { return d.color })
+      .style("stroke", function (d) { return "#000" })
+      .style("stroke-width", 5)
+      .call(d3.drag()
+          .on("start", dragstarted)
+          .on("drag", dragged)
+          .on("end", dragended));     
+
+  var text = node.append("text").text( function(d) { return d.label});
+
+  var ticked = function() {
+      link
+          .attr("x1", function(d) { return d.source.x; })
+          .attr("y1", function(d) { return d.source.y; })
+          .attr("x2", function(d) { return d.target.x; })
+          .attr("y2", function(d) { return d.target.y; });
+
+      text
+          .attr("x", function(d) { return d.x + 10 + (d.r * width / 50); })
+          .attr("y", function(d) { return d.y; })
+          .attr("dy", function(d) { return ".35em"; });
+      node
+          .attr("cx", function(d) { return d.x; })
+          .attr("cy", function(d) { return d.y; });
+      circle
+          .attr("cx", function(d) { return d.x; })
+          .attr("cy", function(d) { return d.y; });
+
+  }  
+  
+  simulation
+      .nodes(data.nodes)
+      .on("tick", ticked);
+
+  simulation.force("link")
+      .links(data.links);    
+  
+ function dragstarted(d) {
+      if (!d3.event.active) simulation.alphaTarget(0.3).restart();
+      d.fx = d.x;
+      d.fy = d.y;
+  }
+  
+  function dragged(d) {
+      d.fx = d3.event.x;
+      d.fy = d3.event.y;
+  }
+  
+  function dragended(d) {
+      if (!d3.event.active) simulation.alphaTarget(0);
+      d.fx = null;
+      d.fy = null;
+  } 
+          
+}
+
+</script>  
+
+</body>
+</html>
