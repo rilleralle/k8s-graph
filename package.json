@@ -1,0 +1,8 @@
+{
+  "name": "k8s-graph",
+  "version": "0.0.1",
+  "dependencies": {
+    "express": "4.15.3",
+    "http": "0.0.0"
+  }
+}
