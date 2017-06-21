@@ -1,6 +1,6 @@
 'use strict';
 
-var express = require('express')
+var express = require('express');
 var http = require('http');
 var app = express();
 var server = http.createServer(app);
@@ -14,11 +14,12 @@ function extractInformation(parsedData) {
         return item.spec.nodeName;
     });
     minions = [...new Set(minions)];
-    var minions = minions.map(function(item) {
-        return {id: item, size: 30, text: item, color: item};
+    minions = minions.map(function(item) {
+        return {id: item, size: 30, text: item, color: item, type: "node"};
     });
-    while (minions.length < 4) {
-        minions.push({id: 'dummy'+minions.length, size: 30, color: 'dummy'})
+    let i = 0;
+    while (minions.length < 1) {
+        minions.push({id: 'dummy'+i++, size: 30, color: 'dummy', type: "node"})
     }
     const pods = parsedData.items.map(function(item) {
         return {
@@ -27,14 +28,14 @@ function extractInformation(parsedData) {
             size: 15,
             color: item.metadata.labels.app};
     });
-    const nodes = [{id: 'Master', size: 30, text: 'Master'}].concat(minions).concat(pods);
+    const nodes = [{id: 'Master', size: 30, text: 'Master', type: "master"}].concat(minions).concat(pods);
 
     //Links
     const links = parsedData.items.map(function(item) {
-        return {source: item.metadata.name, target: item.spec.nodeName, length: 300};
+        return {source: item.metadata.name, target: item.spec.nodeName, length: 500};
     });
     minions.forEach(function(item) {
-        links.push({source: item.id, target: 'Master', length: 600});
+        links.push({source: item.id, target: 'Master', length: 800});
     });
 
     return {links: links, nodes: nodes};
