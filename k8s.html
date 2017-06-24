@@ -1,32 +1,65 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>k8s graph - By Ralf Strobel</title>
+    <title>k8s graph</title>
 </head>
 <meta charset="utf-8">
 <style type="text/css">
     html, body {
         height: 100%;
         margin: 0;
+        font-family: "Lucida Console", Monaco, monospace;
     }
 
+    input[type=checkbox] {
+        /* Double-sized Checkboxes */
+        -ms-transform: scale(2); /* IE */
+        -moz-transform: scale(2); /* FF */
+        -webkit-transform: scale(2); /* Safari and Chrome */
+        -o-transform: scale(2); /* Opera */
+        margin: 15px;
+    }
+
+    .checkboxtext {
+        font-size: 110%;
+        display: inline;
+    }
+
+    div.tooltip {
+        position: absolute;
+        text-align: center;
+        padding: 4px;
+        background: ivory;
+        border-radius: 8px;
+        pointer-events: none;
+    }
 </style>
 
 <body>
+<input id="input" type="checkbox" onclick="toggleStickyObjects()">
+
+<span class="checkboxtext">Sticky objects</span>
 <svg id="wrapper" width="100%" height="100%"></svg>
+
 <script type="text/javascript" src="https://d3js.org/d3.v4.js"></script>
+<script src="/socket.io/socket.io.js"></script>
+
 <script>
     "use strict";
 
-    var go = true,
-        svg = d3.select("svg"),
-        width = 800,
-        height = 800,
+    let runSimulation = true;
+    let stickyObjects = false;
+
+    const svg = d3.select("svg"),
+        width = "100%",
+        height = "100%",
         color = d3.scaleOrdinal(d3.schemeCategory10),
         nodes = [],
-        links = [];
-
-    var simulation = d3.forceSimulation()
+        links = [],
+        div = d3.select("body").append("div")
+        .attr("class", "tooltip")
+        .style("opacity", 0),
+        simulation = d3.forceSimulation()
         .force("charge", d3.forceManyBody().strength(-1000))
         .force("collide",d3.forceCollide(function(d) {return d.size * 1.3 }).iterations(2) )
         .force("link", d3.forceLink(links).id(function(d) {return d.id;}).distance(function(d) {return d.length / 6;}))
@@ -42,7 +75,7 @@
         .style("pointer-events", "all")
         .call(d3.zoom()
             .on("zoom", zoomed));
-    var g = svg.append("g"),
+    let g = svg.append("g"),
         link = g.append("g").attr("class", "link").attr("stroke", "#000").selectAll(".link"),
         node = g.append("g").attr("class", "node").attr("stroke", "#000").selectAll(".node"),
         text = g.append("g").attr("class", "text").selectAll(".text");
@@ -57,9 +90,9 @@
             .attr("d", d3.symbol()
                 .size(function(d) {return d.size*100})
                 .type(function(d) {
-                    if (d.type === "node") {
+                    if (d.type === "Node") {
                         return d3.symbolSquare;
-                    } else if (d.type === "master") {
+                    } else if (d.type === "Master") {
                         return d3.symbolStar;
                     } else {
                         return d3.symbolCircle;
@@ -68,11 +101,25 @@
             .attr("fill", function(d) { return color(d.color); })
             .attr("class", "node")
             .attr("stroke-width", function(d) {return d.size * 0.15})
+            .on("mouseover", function(d) {
+                div.transition()
+                    .duration(200)
+                    .style("opacity", .9);
+                div.html(`Type: ${d.type}, Name: ${d.text}`)
+                    .style("left", (d3.event.pageX) + "px")
+                    .style("top", (d3.event.pageY - 28) + "px");
+            })
+            .on("mouseout", function() {
+                div.transition()
+                    .duration(500)
+                    .style("opacity", 0);
+            })
             .call(d3.drag()
                 .on("start", dragstarted)
                 .on("drag", dragged)
                 .on("end", dragended))
             .merge(node);
+
         // Links
         link = link.data(links);
         link.exit().remove();
@@ -80,7 +127,9 @@
             .append("line")
             .attr("class", "line")
             .attr("stroke-width", 2)
+            .style("stroke-dasharray", function(d) { return d.dotted ? ("3, 3") : ("1, 0") })
             .merge(link);
+
         // Text
         text = text.data(nodes);
         text.exit().remove();
@@ -91,31 +140,33 @@
             .text(function(d) {return d.text})
             .merge(text);
 
-        // Update and restart the simulation.
+        // Update simulation
         simulation.nodes(nodes);
         simulation.force("link").links(links);
     }
 
     function ticked() {
         svg.selectAll("path")
-            .attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
+            .attr("transform", function (d) { return "translate(" + d.x + "," + d.y + ")"; });
 
-        node.attr("cx", function(d) { return d.x; })
-            .attr("cy", function(d) { return d.y; });
+        node.attr("cx", function (d) { return d.x; })
+            .attr("cy", function (d) { return d.y; });
 
-        link.attr("x1", function(d) { return d.source.x; })
-            .attr("y1", function(d) { return d.source.y; })
-            .attr("x2", function(d) { return d.target.x; })
-            .attr("y2", function(d) { return d.target.y; });
+        link.attr("x1", function (d) { return d.source.x; })
+            .attr("y1", function (d) { return d.source.y; })
+            .attr("x2", function (d) { return d.target.x; })
+            .attr("y2", function (d) { return d.target.y; });
 
-        text.attr("x", function(d) { return d.x + d.size * 1.2; })
-            .attr("y", function(d) { return d.y; })
+        text.attr("x", function (d) { return d.x + d.size * 1.8; })
+            .attr("y", function (d) { return d.y; })
             .attr("dy", "0.35em");
-        //simulation.restart();
-
     }
+
     function dragstarted(d) {
-        if (!d3.event.active) simulation.alphaTarget(0.3).restart();
+        if (!d3.event.active) {
+            simulation.alphaTarget(0.3).restart();
+        }
+
         d.fx = d.x;
         d.fy = d.y;
     }
@@ -126,17 +177,24 @@
     }
 
     function dragended(d) {
-        if (!d3.event.active) simulation.alphaTarget(0);
+        if (!d3.event.active) {
+            simulation.alphaTarget(0);
+        }
+        if (!stickyObjects) {
+            d.fx = null;
+            d.fy = null;
+        }
     }
+
     function zoomed() {
         g.attr("transform", d3.event.transform);
     }
-</script>
-<script src="/socket.io/socket.io.js"></script>
-<script>
+
+    // Socket connection to server
     let socket = io();
+    // Handle updates
     socket.on('update', function(msg) {
-        function updatesNodes(nodesFromServer) {
+        function updateNodes(nodesFromServer) {
             // Delete
             let i = 0;
             nodes.forEach(node => {
@@ -155,7 +213,7 @@
             });
         }
 
-        function updatesLinks(linksFromServer) {
+        function updateLinks(linksFromServer) {
             let i = 0;
             // Delete
             links.forEach(link => {
@@ -174,15 +232,19 @@
             });
         }
 
-        if (go) {
-            updatesNodes(msg.nodes);
-            updatesLinks(msg.links);
+        if (runSimulation) {
+            updateNodes(msg.nodes);
+            updateLinks(msg.links);
             restart();
         }
-    });
-    socket.on('error', function(error) {
+    }).on('error', function(error) {
         console.error("Error from server: " + error);
     });
+
+    function toggleStickyObjects() {
+        stickyObjects = !stickyObjects;
+    }
+
 </script>
 </body>
 </html>
