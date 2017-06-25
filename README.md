@@ -10,7 +10,7 @@ part 1. and 2. and just create the k8s deployment.
 1. Node server, that polls the information from k8s api and creates
 a graph using [D3](https://d3js.org/).
 2. Dockerfile, that creates the container.
-3. k8s yaml file, that will create aservice and a deployment with two containers
+3. k8s yaml file, that will create a service and a deployment with two containers.
     1. kubectl started with proxy, so the node server can
     access the k8s api.
     2. Node server, that renders the graph using D3.
