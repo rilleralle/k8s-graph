@@ -36,9 +36,12 @@
 </style>
 
 <body>
-<input id="input" type="checkbox" onclick="toggleStickyObjects()">
-
+<input type="checkbox" onclick="toggleStickyObjects()">
 <span class="checkboxtext">Sticky objects</span>
+
+<input type="checkbox" onclick="toggleTextVisibility()" checked="true">
+<span class="checkboxtext">Text visible</span>
+
 <svg id="wrapper" width="100%" height="100%"></svg>
 
 <script type="text/javascript" src="https://d3js.org/d3.v4.js"></script>
@@ -49,6 +52,7 @@
 
     let runSimulation = true;
     let stickyObjects = false;
+    let textVisibility = true;
 
     const svg = d3.select("svg"),
         width = "100%",
@@ -63,8 +67,9 @@
         .force("charge", d3.forceManyBody().strength(-1000))
         .force("collide",d3.forceCollide(function(d) {return d.size * 1.3 }).iterations(2) )
         .force("link", d3.forceLink(links).id(function(d) {return d.id;}).distance(function(d) {return d.length / 6;}))
-        .force("x", d3.forceX())
-        .force("y", d3.forceY())
+        .force("x", d3.forceX(300))
+        .force("y", d3.forceY(300))
+
         .alphaTarget(.01)
         .on("tick", ticked);
 
@@ -243,6 +248,11 @@
 
     function toggleStickyObjects() {
         stickyObjects = !stickyObjects;
+    }
+
+    function toggleTextVisibility() {
+        textVisibility = !textVisibility;
+        text.attr("visibility", textVisibility ? "visible" : "hidden");
     }
 
 </script>
