@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: k8s-service
+  name: k8s-graph
 spec:
   selector:
     app: k8s-graph
@@ -9,6 +9,7 @@ spec:
     - protocol: TCP
       port: 3000
       targetPort: 3000
+  #type: LoadBalancer
   type: NodePort
 ---
 apiVersion: apps/v1beta1
@@ -24,11 +25,12 @@ spec:
     spec:
       containers:
       - name: k8s-graph
-        image: rilleralle/k8s-graph
+        image: rilleralle/k8s-graph-arm64
         ports:
         - containerPort: 3000
       - name: kubectl
-        image: gcr.io/google_containers/kubectl:v0.18.0-120-gaeb4ac55ad12b1-dirty
+        image: http://storage.googleapis.com/kubernetes-release/archive/anago-v1.10.0-alpha.1/k8s.io/kubernetes/_output-v1.10.0-alpha.1/dockerized/bin/linux/arm64/kubectl
+        #image: gcr.io/google_containers/kubectl:v0.18.0-120-gaeb4ac55ad12b1-dirty
         args:
           - "proxy"
           - "-p"

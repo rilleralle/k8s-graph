@@ -11,8 +11,8 @@ const port = 3000;
 const masterSize = getEnvVar('masterSize', 30);
 const minionSize = getEnvVar('minionSize', 30);
 const podSize = getEnvVar('podSize', 15);
-const linkSizePodToMinion = getEnvVar('linkSizePodToMinion', 500);
-const linkSizeMinionToMaster = getEnvVar('linkSizeMinionToMaster', 800);
+const linkSizePodToMinion = getEnvVar('linkSizePodToMinion', 800);
+const linkSizeMinionToMaster = getEnvVar('linkSizeMinionToMaster', 1000);
 const dummyNodes = getEnvVar('dummyNodes', 0);
 const podsApiUrl = getEnvVar('podsApiUrl', 'http://127.0.0.1:8001/api/v1/namespaces/default/pods');
 const pollingIntervalInSeconds = getEnvVar('pollingIntervalInSeconds', 1);
@@ -44,7 +44,7 @@ function extractInformation(parsedData) {
             id: item.metadata.name,
             text: item.metadata.name,
             size: podSize,
-            color: item.metadata.labels.app,
+            color: item.metadata.labels.app === undefined ? item.metadata.labels.run : item.metadata.labels.app,
             type: "Pod"
         };
     });
