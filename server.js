@@ -87,7 +87,7 @@ function poll() {
                 handleError('Unable to parse and extract information from k8s response.\n'
                     + `Error message: ${e.message}\n`
                     + `--- response from k8s API call ---\n`
-                    + `${JSON.stringify(res)}\n`
+                    + `${rawData}\n`
                     + `--- response end ---\n`);
             }
         });
