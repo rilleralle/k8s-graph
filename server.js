@@ -85,7 +85,10 @@ function poll() {
                 io.emit('update', result);
             } catch (e) {
                 handleError('Unable to parse and extract information from k8s response.\n'
-                    + `Error message: ${e.message}`);
+                    + `Error message: ${e.message}\n`
+                    + `--- response from k8s API call ---\n`
+                    + `${res}\n`
+                    + `--- response end ---\n`);
             }
         });
     }).on('error', (e) => {
