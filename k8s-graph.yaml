@@ -29,9 +29,4 @@ spec:
         ports:
         - containerPort: 3000
       - name: kubectl
-        image: http://storage.googleapis.com/kubernetes-release/archive/anago-v1.10.0-alpha.1/k8s.io/kubernetes/_output-v1.10.0-alpha.1/dockerized/bin/linux/arm64/kubectl
-        #image: gcr.io/google_containers/kubectl:v0.18.0-120-gaeb4ac55ad12b1-dirty
-        args:
-          - "proxy"
-          - "-p"
-          - "8001"
+        image: rilleralle/kubectl-arm64
