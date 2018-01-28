@@ -30,3 +30,5 @@ spec:
         - containerPort: 3000
       - name: kubectl
         image: rilleralle/kubectl-arm64
+        ports:
+        - containerPort: 8001
