@@ -33,6 +33,57 @@
         border-radius: 8px;
         pointer-events: none;
     }
+
+    .pulse {
+        animation: pulse 0.5s infinite;
+    }
+
+    @keyframes pulse {
+        0% {
+            stroke: black;
+        }
+        50% {
+            stroke: #ff1931;
+            stroke-width: 15;
+        }
+        100% {
+            stroke: black;
+        }
+    }
+
+    .start {
+        animation: start 2s infinite;
+    }
+    @keyframes start {
+        0% {
+            stroke: black;
+            stroke-opacity: 0;
+            opacity: 0.5;
+        }
+        100% {
+            stroke: #3fff47;
+            stroke-width: 30;
+            stroke-opacity: 1;
+            opacity: 1;
+        }
+    }
+
+    .delete {
+        animation: delete 2s infinite ease-in-out;
+    }
+    @keyframes delete {
+        0% {
+            stroke: #1e67ff;
+            stroke-width: 30;
+            stroke-opacity: 1;
+            opacity: 1;
+        }
+        100% {
+            stroke: #1e67ff;
+            stroke-opacity: 0.5;
+            opacity: 0.5;
+        }
+    }
 </style>
 
 <body>
@@ -93,53 +144,57 @@
 
     function restart() {
         // Nodes
-        node = node.data(nodes, function (d) {
-            return d.id;
-        });
+        node = node.data(nodes, d => d.id);
         node.exit().remove();
-        node = node.enter()
-            .append("path")
-            .attr("d", d3.symbol()
-                .size(function (d) {
-                    return d.size * 100
-                })
-                .type(function (d) {
-                    if (d.type === "Node") {
-                        return d3.symbolSquare;
-                    } else if (d.type === "Master") {
-                        return d3.symbolStar;
-                    } else {
-                        return d3.symbolCircle;
-                    }
-                }))
-            .attr("fill", function (d) {
-                return color(d.color);
+        node = node.enter().append("path").merge(node);
+        node.attr("d", d3.symbol()
+            .size(function (d) {
+                return d.size * 100
             })
-            .attr("class", "node")
-            .attr("stroke-width", function (d) {
-                return d.size * 0.15;
-            })
-            .on("mouseover", function (d) {
-                div.transition()
-                    .duration(200)
-                    .style("opacity", .9);
-                div.html(`Type: ${d.type}, Name: ${d.text}`)
-                    .style("left", (d3.event.pageX) + "px")
-                    .style("top", (d3.event.pageY - 28) + "px");
-            })
-            .on("mouseout", function () {
-                div.transition()
-                    .duration(500)
-                    .style("opacity", 0);
-            })
-            .call(d3.drag()
-                .on("start", dragstarted)
-                .on("drag", dragged)
-                .on("end", dragended))
-            .merge(node);
+            .type(function (d) {
+                if (d.type === "Node") {
+                    return d3.symbolSquare;
+                } else if (d.type === "Master") {
+                    return d3.symbolStar;
+                } else {
+                    return d3.symbolCircle;
+                }
+            }))
+        .attr("fill", function (d) {
+            return color(d.color);
+        })
+        .attr("class", "node")
+        .attr("stroke-width", function (d) {
+            return d.size * 0.15;
+        })
+        .on("mouseover", function (d) {
+            div.transition()
+                .duration(200)
+                .style("opacity", .9);
+            let text = `Type: ${d.type}, Name: ${d.text}`;
+            if (d.type === "Pod") {
+                text = text + `, Restarts: ${d.restarts}`;
+            }
+            div.html(text)
+                .style("left", (d3.event.pageX) + "px")
+                .style("top", (d3.event.pageY - 28) + "px");
+        })
+        .on("mouseout", function () {
+            div.transition()
+                .duration(500)
+                .style("opacity", 0);
+        })
+        .call(d3.drag()
+            .on("start", dragstarted)
+            .on("drag", dragged)
+            .on("end", dragended));
+
+        node.classed("start", function (d) {return d.status == "start"});
+        node.classed("delete", function (d) {return d.status == "delete"});
+        node.classed("pulse", function (d) {return d.status == "pulse"});
 
         // Links
-        link = link.data(links);
+        link = link.data(links, d => d.source.id + d.target.id);
         link.exit().remove();
         link = link.enter()
             .append("line")
@@ -151,14 +206,12 @@
             .merge(link);
 
         // Text
-        text = text.data(nodes);
+        text = text.data(nodes, d => d.id);
         text.exit().remove();
-        text = text.enter()
-            .append("text")
-            .attr("class", "text")
+        text = text.enter().append("text").merge(text);
+        text.attr("class", "text")
             .attr("font-size", function (d) { return d.size })
-            .text(function (d) { return d.text })
-            .merge(text);
+            .text(function (d) { return d.text });
 
         // Update simulation
         simulation.nodes(nodes);
@@ -218,19 +271,23 @@
     socket.on('update', function(msg) {
         function updateNodes(nodesFromServer) {
             // Delete
-            let i = 0;
-            nodes.forEach(node => {
+            nodes.forEach((node, index, array) => {
                 if (nodesFromServer.find(item => item.id === node.id) === undefined) {
-                    nodes.splice(i, 1);
+                    array.splice(index, 1);
                     simulation.alpha(.01).restart();
                 }
-                i++;
             });
 
-            // Insert
             nodesFromServer.forEach(node => {
-                if (nodes.find(item => item.id === node.id) === undefined) {
+                const findNode = nodes.find(item => item.id === node.id);
+                // Insert
+                if (findNode === undefined) {
                     nodes.push(node);
+                // Update metadata
+                } else if (findNode.status !== node.status || findNode.restarts != node.restarts) {
+                    findNode.status = node.status;
+                    findNode.restarts = node.restarts;
+                    simulation.alpha(.01).restart();
                 }
             });
         }
@@ -250,6 +307,7 @@
             linksFromServer.forEach(link => {
                 if (links.find(item => item.source.id === link.source && item.target.id === link.target) === undefined) {
                     links.push(link);
+                    simulation.alpha(.01).restart();
                 }
             });
         }

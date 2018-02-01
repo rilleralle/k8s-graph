@@ -15,22 +15,46 @@ const linkSizePodToMinion = getEnvVar('linkSizePodToMinion', 800);
 const linkSizeMinionToMaster = getEnvVar('linkSizeMinionToMaster', 1000);
 const dummyNodes = getEnvVar('dummyNodes', 0);
 const podsApiUrl = getEnvVar('podsApiUrl', 'http://127.0.0.1:8001/api/v1/namespaces/default/pods');
+const nodesApiUrl = getEnvVar('nodesApiUrl', 'http://127.0.0.1:8001/api/v1/nodes');
 const pollingIntervalInSeconds = getEnvVar('pollingIntervalInSeconds', 1);
+
+let podsResult;
+let nodesResult;
 
 function getEnvVar(envVar, defaultValue) {
     const value = process.env[envVar];
     return value === undefined ? defaultValue : value;
 }
 
-function extractInformation(parsedData) {
-    //Minions, the nodes of the k8s cluster
-    let minions = parsedData.items.map(function(item) {
-        return item.spec.nodeName;
+function extractInformation() {
+    //Extract master and minions nodes
+    let master;
+    let minions = nodesResult.items.map(function(item) {
+        const conditions = item.status.conditions.find((item) => {return item.type === "Ready"});
+
+        let node  = {
+            id: item.metadata.name,
+            size: minionSize,
+            text: item.metadata.name,
+            color: item.metadata.name,
+            type: "Node",
+            status: conditions.status !== "True" ? "pulse" : ""
+        };
+
+        // Looks like this is how we can identify the master
+        const isMaster = item.spec.taints;
+        // Set master relevant configuration
+        if (isMaster) {
+            master = item.metadata.name;
+            node.type = "Master";
+            node.size = masterSize;
+        }
+
+        return node;
     });
-    minions = [...new Set(minions)];
-    minions = minions.map(function(item) {
-        return {id: item, size: minionSize, text: item, color: item, type: "Node"};
-    });
+    if (!master) {
+        throw {message: "Could not identify master node. Please check if k8s update was a breaking change."};
+    }
 
     //Dummy nodes
     let i = 0;
@@ -39,28 +63,32 @@ function extractInformation(parsedData) {
     }
 
     //Pods
-    const pods = parsedData.items.map(function(item) {
+    const pods = podsResult.items.map(function(item) {
+        const status = item.metadata.deletionTimestamp ? "delete" : item.status.phase === "Pending" ? "start" : "";
+        const restartCount = item.status.containerStatuses
+            .map((item) => item.restartCount)
+            .reduce((sum, value) => sum + value);
         return {
             id: item.metadata.name,
             text: item.metadata.name,
             size: podSize,
             color: item.metadata.labels.app === undefined ? item.metadata.labels.run : item.metadata.labels.app,
-            type: "Pod"
+            status: status,
+            type: "Pod",
+            restarts: restartCount
         };
     });
-    //Kubernetes master
-    const k8sMaster = [{id: 'Master', size: masterSize, text: 'Master', type: "Master"}];
-    //
-    const nodes = k8sMaster.concat(minions).concat(pods);
 
+    // Merge minions (also the master node) and pods
+    const nodes = minions.concat(pods);
     //Links
     //Pod to minion
-    const links = parsedData.items.map(function(item) {
+    const links = podsResult.items.map(function(item) {
         return {source: item.metadata.name, target: item.spec.nodeName, length: linkSizePodToMinion, dotted: true};
     });
     //Minion to master
     minions.forEach(function(item) {
-        links.push({source: item.id, target: 'Master', length: linkSizeMinionToMaster, dotted: false});
+        links.push({source: item.id, target: master, length: linkSizeMinionToMaster, dotted: false});
     });
 
     return {links: links, nodes: nodes};
@@ -75,24 +103,47 @@ io.on('connection', function(){
 });
 
 function poll() {
-    http.get(podsApiUrl, (res) => {
-        res.setEncoding('utf8');
-        let rawData = '';
-        res.on('data', (chunk) => { rawData += chunk; });
-        res.on('end', () => {
-            try {
-                const result = extractInformation(JSON.parse(rawData));
-                io.emit('update', result);
-            } catch (e) {
-                handleError('Unable to parse and extract information from k8s response.\n'
-                    + `Error message: ${e.message}\n`
-                    + `--- response from k8s API call ---\n`
-                    + `${rawData}\n`
-                    + `--- response end ---\n`);
-            }
-        });
-    }).on('error', (e) => {
+    http.get(podsApiUrl, handlePodsCall).on('error', (e) => {
         handleError(`Request to k8s failed.\nError message: ${e.message}`);
+    });
+}
+
+function handlePodsCall(res) {
+    res.setEncoding('utf8');
+    let rawData = '';
+    res.on('data', (chunk) => { rawData += chunk; });
+    res.on('end', () => {
+        try {
+            podsResult = JSON.parse(rawData);
+            http.get(nodesApiUrl, handleNodesCall).on('error', (e) => {
+                handleError(`Request to k8s failed.\nError message: ${e.message}`);
+            });
+        } catch (e) {
+            handleError('Unable to parse and extract information from k8s response.\n'
+                + `Error message: ${e.message}\n`
+                + `--- response from k8s API call ---\n`
+                + `${rawData}\n`
+                + `--- response end ---\n`);
+        }
+    });
+}
+
+function handleNodesCall(res) {
+    res.setEncoding('utf8');
+    let rawData = '';
+    res.on('data', (chunk) => { rawData += chunk; });
+    res.on('end', () => {
+        try {
+            nodesResult = JSON.parse(rawData);
+            const result = extractInformation();
+            io.emit('update', result);
+        } catch (e) {
+            handleError('Unable to parse and extract information from k8s response.\n'
+                + `Error message: ${e.message}\n`
+                + `--- response from k8s API call ---\n`
+                + `${rawData}\n`
+                + `--- response end ---\n`);
+        }
     });
 }
 
@@ -101,7 +152,7 @@ function handleError(errorMessage) {
     io.emit('error', errorMessage);
 }
 
-setInterval(poll, 1000);
+setInterval(poll, pollingIntervalInSeconds * 1000);
 
 server.listen(port);
 console.log('Running on http://localhost:' + port);
