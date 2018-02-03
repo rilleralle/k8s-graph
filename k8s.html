@@ -211,7 +211,13 @@
         text = text.enter().append("text").merge(text);
         text.attr("class", "text")
             .attr("font-size", function (d) { return d.size })
-            .text(function (d) { return d.text });
+            .text(function (d) {
+                let text = d.text;
+                if (d.type === "Pod") {
+                    text = text + `, Restarts: ${d.restarts}`;
+                }
+                return text;
+            });
 
         // Update simulation
         simulation.nodes(nodes);
