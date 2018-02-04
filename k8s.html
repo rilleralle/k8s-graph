@@ -20,14 +20,15 @@
         margin: 15px;
     }
 
-    .checkboxtext {
+    .controlls {
         font-size: 110%;
         display: inline;
+        position: fixed;
     }
 
     div.tooltip {
         position: absolute;
-        text-align: center;
+        text-align: left;
         padding: 4px;
         background: ivory;
         border-radius: 8px;
@@ -87,13 +88,15 @@
 </style>
 
 <body>
-<input type="checkbox" onclick="toggleStickyObjects()">
-<span class="checkboxtext">Sticky objects</span>
+<div class="controlls">
+    <input type="checkbox" onclick="toggleStickyObjects()">
+    <span>Sticky objects</span>
 
-<input type="checkbox" onclick="toggleTextVisibility()" checked="true">
-<span class="checkboxtext">Text visible</span>
+    <input type="checkbox" onclick="toggleTextVisibility()" checked="true">
+    <span>Text visible</span>
+</div>
 
-<svg id="wrapper" width="100%" height="100%"></svg>
+<svg id="wrapper" width="100%" height="98%"></svg>
 
 <script type="text/javascript" src="https://d3js.org/d3.v4.js"></script>
 <script src="/socket.io/socket.io.js"></script>
@@ -165,17 +168,23 @@
         })
         .attr("class", "node")
         .attr("stroke-width", function (d) {
-            return d.size * 0.15;
+            let size = d.size * 0.15;
+            let restartWidth = d.restarts ? d.restarts : 0;
+            return size + restartWidth;
         })
         .on("mouseover", function (d) {
             div.transition()
                 .duration(200)
                 .style("opacity", .9);
-            let text = `Type: ${d.type}, Name: ${d.text}`;
+            let html = `Type: ${d.type}<br>Name: ${d.text}`;
             if (d.type === "Pod") {
-                text = text + `, Restarts: ${d.restarts}`;
+                html += `<ul>`;
+                d.containers.forEach((container) => {
+                    html += `<li>Image: ${container.image}, Restarts: ${container.restartCount}</li>`;
+                });
+                html += `</ul>`;
             }
-            div.html(text)
+            div.html(html)
                 .style("left", (d3.event.pageX) + "px")
                 .style("top", (d3.event.pageY - 28) + "px");
         })

@@ -75,7 +75,8 @@ function extractInformation() {
             color: item.metadata.labels.app === undefined ? item.metadata.labels.run : item.metadata.labels.app,
             status: status,
             type: "Pod",
-            restarts: restartCount
+            restarts: restartCount,
+            containers: item.status.containerStatuses
         };
     });
 
