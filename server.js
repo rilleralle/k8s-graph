@@ -53,7 +53,7 @@ function extractInformation() {
         return node;
     });
     if (!master) {
-        throw {message: "Could not identify master node. Please check if k8s update was a breaking change."};
+        console.log("Could not identify master node. Please check if k8s update was a breaking change.");
     }
 
     //Dummy nodes
@@ -88,9 +88,11 @@ function extractInformation() {
         return {source: item.metadata.name, target: item.spec.nodeName, length: linkSizePodToMinion, dotted: true};
     });
     //Minion to master
-    minions.forEach(function(item) {
-        links.push({source: item.id, target: master, length: linkSizeMinionToMaster, dotted: false});
-    });
+    if (master) {
+        minions.forEach(function (item) {
+            links.push({source: item.id, target: master, length: linkSizeMinionToMaster, dotted: false});
+        });
+    }
 
     return {links: links, nodes: nodes};
 }
