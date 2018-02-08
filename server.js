@@ -64,10 +64,19 @@ function extractInformation() {
 
     //Pods
     const pods = podsResult.items.map(function(item) {
-        const status = item.metadata.deletionTimestamp ? "delete" : item.status.phase === "Pending" ? "start" : "";
+        let status = "";
+        if (item.metadata.deletionTimestamp) {
+            status = "delete";
+        } else if (item.status.phase === "Pending") {
+            status = "start";
+        } else if (item.status.conditions.find((item) => {return item.type === "Ready" && item.status === "False"})) {
+            status = "notReady";
+        }
+
         const restartCount = item.status.containerStatuses
             .map((item) => item.restartCount)
             .reduce((sum, value) => sum + value);
+
         return {
             id: item.metadata.name,
             text: item.metadata.name,
