@@ -9,7 +9,7 @@ spec:
     - protocol: TCP
       port: 3000
       targetPort: 3000
-      nodePort: 30002
+      nodePort: 30000
   #type: LoadBalancer
   type: NodePort
 ---
@@ -26,12 +26,10 @@ spec:
     spec:
       containers:
       - name: k8s-graph
-        image: rilleralle/k8s-graph
+        image: rilleralle/k8s-graph-arm64
         ports:
         - containerPort: 3000
       - name: kubectl
-        image: gcr.io/google_containers/kubectl:v0.18.0-120-gaeb4ac55ad12b1-dirty
-        args:
-          - "proxy"
-          - "-p"
-          - "8001"
+        image: rilleralle/kubectl-arm64
+        ports:
+        - containerPort: 8001

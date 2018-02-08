@@ -52,6 +52,23 @@
         }
     }
 
+    .notReady {
+        animation: notReady 0.5s infinite;
+    }
+
+    @keyframes notReady {
+        0% {
+            stroke: black;
+        }
+        50% {
+            stroke: #1e67ff;
+            stroke-width: 15;
+        }
+        100% {
+            stroke: black;
+        }
+    }
+
     .start {
         animation: start 2s infinite;
     }
@@ -201,6 +218,7 @@
         node.classed("start", function (d) {return d.status == "start"});
         node.classed("delete", function (d) {return d.status == "delete"});
         node.classed("pulse", function (d) {return d.status == "pulse"});
+        node.classed("notReady", function (d) {return d.status == "notReady"});
 
         // Links
         link = link.data(links, d => d.source.id + d.target.id);

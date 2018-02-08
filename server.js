@@ -53,7 +53,7 @@ function extractInformation() {
         return node;
     });
     if (!master) {
-        throw {message: "Could not identify master node. Please check if k8s update was a breaking change."};
+        console.log("Could not identify master node. Please check if k8s update was a breaking change.");
     }
 
     //Dummy nodes
@@ -64,10 +64,19 @@ function extractInformation() {
 
     //Pods
     const pods = podsResult.items.map(function(item) {
-        const status = item.metadata.deletionTimestamp ? "delete" : item.status.phase === "Pending" ? "start" : "";
+        let status = "";
+        if (item.metadata.deletionTimestamp) {
+            status = "delete";
+        } else if (item.status.phase === "Pending") {
+            status = "start";
+        } else if (item.status.conditions.find((item) => {return item.type === "Ready" && item.status === "False"})) {
+            status = "notReady";
+        }
+
         const restartCount = item.status.containerStatuses
             .map((item) => item.restartCount)
             .reduce((sum, value) => sum + value);
+
         return {
             id: item.metadata.name,
             text: item.metadata.name,
@@ -88,9 +97,11 @@ function extractInformation() {
         return {source: item.metadata.name, target: item.spec.nodeName, length: linkSizePodToMinion, dotted: true};
     });
     //Minion to master
-    minions.forEach(function(item) {
-        links.push({source: item.id, target: master, length: linkSizeMinionToMaster, dotted: false});
-    });
+    if (master) {
+        minions.forEach(function (item) {
+            links.push({source: item.id, target: master, length: linkSizeMinionToMaster, dotted: false});
+        });
+    }
 
     return {links: links, nodes: nodes};
 }
