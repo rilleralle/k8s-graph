@@ -26,7 +26,6 @@ spec:
       labels:
         app: k8s-graph
     spec:
-      serviceAccountName: kubernetes-dashboard
       containers:
       - name: k8s-graph
         image: rilleralle/k8s-graph
