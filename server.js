@@ -1,6 +1,7 @@
 'use strict';
 
 const express = require('express');
+const hbs = require('express-hbs');
 const http = require('http');
 const app = express();
 const server = http.createServer(app);
@@ -11,13 +12,14 @@ const port = 3000;
 const masterSize = getEnvVar('masterSize', 30);
 const minionSize = getEnvVar('minionSize', 30);
 const podSize = getEnvVar('podSize', 15);
-const linkSizePodToMinion = getEnvVar('linkSizePodToMinion', 800);
-const linkSizeMinionToMaster = getEnvVar('linkSizeMinionToMaster', 1000);
+const linkSizePodToMinion = getEnvVar('linkSizePodToMinion', 200);
+const linkSizeMinionToMaster = getEnvVar('linkSizeMinionToMaster', 300);
 const dummyNodes = getEnvVar('dummyNodes', 0);
-const podsApiUrl = getEnvVar('podsApiUrl', 'http://127.0.0.1:8001/api/v1/namespaces/default/pods');
+const namespacesUrl = getEnvVar('namespacesUrl', 'http://127.0.0.1:8001/api/v1/namespaces/');
 const nodesApiUrl = getEnvVar('nodesApiUrl', 'http://127.0.0.1:8001/api/v1/nodes');
 const pollingIntervalInSeconds = getEnvVar('pollingIntervalInSeconds', 1);
 
+let namespace = "default";
 let podsResult;
 let nodesResult;
 
@@ -71,6 +73,8 @@ function extractInformation() {
             status = "start";
         } else if (item.status.conditions.find((item) => {return item.type === "Ready" && item.status === "False"})) {
             status = "notReady";
+        } else {
+            status = "ready"
         }
 
         const restartCount = item.status.containerStatuses
@@ -106,16 +110,48 @@ function extractInformation() {
     return {links: links, nodes: nodes};
 }
 
-app.get('/', function (req, res) {
-    res.sendFile(__dirname + '/k8s.html');
+app.use(express.static('client'));
+// Setup
+app.engine('hbs', hbs.express4({}));
+app.set('view engine', 'hbs');
+app.set('views', __dirname + '/client');
+
+// Fetch available namespaces before serving
+http.get(namespacesUrl, handleNamespacesCall).on('error', (e) => {
+    handleError(`Request to k8s failed.\nError message: ${e.message}`);
 });
 
-io.on('connection', function(){
+function handleNamespacesCall(res) {
+    res.setEncoding('utf8');
+    let rawData = '';
+    res.on('data', (chunk) => { rawData += chunk; });
+    res.on('end', () => {
+        try {
+            let namespaces = JSON.parse(rawData).items.map((item) => item.metadata.name);
+            // Serve
+            app.get('/', (request, response) => {
+                response.render('k8s',
+                    {
+                        namespaces: namespaces
+                    });
+            });
+        } catch (e) {
+            handleError('Unable to fetch namespaces from k8s response.\n'
+                + `Error message: ${e.message}\n`
+                + `--- response from k8s API call ---\n`
+                + `${rawData}\n`
+                + `--- response end ---\n`);
+        }
+    });
+}
+
+io.on('connection', (socket) => {
+    socket.on('changeNamespace', (newNamespace) => namespace = newNamespace);
     poll();
 });
 
 function poll() {
-    http.get(podsApiUrl, handlePodsCall).on('error', (e) => {
+    http.get(`${namespacesUrl}${namespace}/pods`, handlePodsCall).on('error', (e) => {
         handleError(`Request to k8s failed.\nError message: ${e.message}`);
     });
 }
