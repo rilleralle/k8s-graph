@@ -110,7 +110,7 @@ function extractInformation() {
     return {links: links, nodes: nodes};
 }
 
-app.use(express.static('client'));
+app.use(express.static(__dirname + '/client'));
 // Setup
 app.engine('hbs', hbs.express4({}));
 app.set('view engine', 'hbs');
