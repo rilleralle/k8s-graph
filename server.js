@@ -117,10 +117,7 @@ app.engine('hbs', hbs.express4({}));
 app.set('view engine', 'hbs');
 app.set('views', __dirname + '/client');
 
-// Fetch available namespaces
-http.get(namespacesUrl, handleNamespacesCall).on('error', (e) => {
-    handleError(`Request to k8s failed.\nError message: ${e.message}`);
-});
+fetchNamespaces();
 
 function handleNamespacesCall(res) {
     res.setEncoding('utf8');
@@ -141,11 +138,18 @@ function handleNamespacesCall(res) {
 
 // Serve
 app.get('/', (request, response) => {
+    fetchNamespaces();
     response.render('k8s',
         {
             namespaces: namespaces
         });
 });
+
+function fetchNamespaces() {
+    http.get(namespacesUrl, handleNamespacesCall).on('error', (e) => {
+        handleError(`Request to k8s failed.\nError message: ${e.message}`);
+    });
+}
 
 io.on('connection', (socket) => {
     socket.on('changeNamespace', (newNamespace) => namespace = newNamespace);
