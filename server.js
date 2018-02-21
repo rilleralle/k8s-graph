@@ -137,7 +137,6 @@ function handleNamespacesCall(res) {
 }
 
 // Serve
-console.log("Serve");
 app.get('/', (request, response) => {
     fetchNamespaces();
     response.render('k8s',
@@ -147,11 +146,9 @@ app.get('/', (request, response) => {
 });
 
 function fetchNamespaces() {
-    console.log("Fetch namespaces");
     http.get(namespacesUrl, handleNamespacesCall).on('error', (e) => {
         handleError(`Request to k8s failed.\nError message: ${e.message}`);
     });
-
 }
 
 io.on('connection', (socket) => {
@@ -160,8 +157,6 @@ io.on('connection', (socket) => {
 });
 
 function poll() {
-    console.log("Fetch pods");
-
     http.get(`${namespacesUrl}${namespace}/pods`, handlePodsCall).on('error', (e) => {
         handleError(`Request to k8s failed.\nError message: ${e.message}`);
     });
