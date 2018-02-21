@@ -17,7 +17,7 @@ const svg = d3.select("svg"),
         .style("opacity", 0),
     simulation = d3.forceSimulation()
         .force("center", d3.forceCenter(100, 300))
-        .force("charge", d3.forceManyBody(-1000))
+        .force("charge", d3.forceManyBody().strength(-750))
         .force("collide", d3.forceCollide((d) => d.size * 2))
         .force("link", d3.forceLink(links).id((d) => d.id).distance((d) => d.length))
         .alphaTarget(.01)
@@ -91,10 +91,10 @@ function restart() {
             .on("drag", dragged)
             .on("end", dragended));
 
-    node.classed("start", function (d) {return d.status == "start"});
-    node.classed("delete", function (d) {return d.status == "delete"});
-    node.classed("pulse", function (d) {return d.status == "pulse"});
-    node.classed("notReady", function (d) {return d.status == "notReady"});
+    node.classed("start", function (d) {return d.status === "start"});
+    node.classed("delete", function (d) {return d.status === "delete"});
+    node.classed("pulse", function (d) {return d.status === "pulse"});
+    node.classed("notReady", function (d) {return d.status === "notReady"});
 
     // Links
     link = link.data(links, d => d.source.id + d.target.id);
@@ -193,7 +193,7 @@ socket.on('update', function(msg) {
             if (findNode === undefined) {
                 nodes.push(node);
                 // Update metadata
-            } else if (findNode.status !== node.status || findNode.restarts != node.restarts) {
+            } else if (findNode.status !== node.status || findNode.restarts !== node.restarts) {
                 findNode.status = node.status;
                 findNode.restarts = node.restarts;
                 findNode.containers = node.containers;

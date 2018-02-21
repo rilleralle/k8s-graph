@@ -9,11 +9,11 @@ const io = require('socket.io').listen(server);
 
 const port = 3000;
 
-const masterSize = getEnvVar('masterSize', 30);
-const minionSize = getEnvVar('minionSize', 30);
+const masterSize = getEnvVar('masterSize', 15);
+const minionSize = getEnvVar('minionSize', 15);
 const podSize = getEnvVar('podSize', 15);
-const linkSizePodToMinion = getEnvVar('linkSizePodToMinion', 200);
-const linkSizeMinionToMaster = getEnvVar('linkSizeMinionToMaster', 300);
+const linkSizePodToMinion = getEnvVar('linkSizePodToMinion', 150);
+const linkSizeMinionToMaster = getEnvVar('linkSizeMinionToMaster', 250);
 const dummyNodes = getEnvVar('dummyNodes', 0);
 const namespacesUrl = getEnvVar('namespacesUrl', 'http://127.0.0.1:8001/api/v1/namespaces/');
 const nodesApiUrl = getEnvVar('nodesApiUrl', 'http://127.0.0.1:8001/api/v1/nodes');
@@ -22,6 +22,7 @@ const pollingIntervalInSeconds = getEnvVar('pollingIntervalInSeconds', 1);
 let namespace = "default";
 let podsResult;
 let nodesResult;
+let namespaces;
 
 function getEnvVar(envVar, defaultValue) {
     const value = process.env[envVar];
@@ -116,7 +117,7 @@ app.engine('hbs', hbs.express4({}));
 app.set('view engine', 'hbs');
 app.set('views', __dirname + '/client');
 
-// Fetch available namespaces before serving
+// Fetch available namespaces
 http.get(namespacesUrl, handleNamespacesCall).on('error', (e) => {
     handleError(`Request to k8s failed.\nError message: ${e.message}`);
 });
@@ -127,14 +128,7 @@ function handleNamespacesCall(res) {
     res.on('data', (chunk) => { rawData += chunk; });
     res.on('end', () => {
         try {
-            let namespaces = JSON.parse(rawData).items.map((item) => item.metadata.name);
-            // Serve
-            app.get('/', (request, response) => {
-                response.render('k8s',
-                    {
-                        namespaces: namespaces
-                    });
-            });
+            namespaces = JSON.parse(rawData).items.map((item) => item.metadata.name);
         } catch (e) {
             handleError('Unable to fetch namespaces from k8s response.\n'
                 + `Error message: ${e.message}\n`
@@ -144,6 +138,14 @@ function handleNamespacesCall(res) {
         }
     });
 }
+
+// Serve
+app.get('/', (request, response) => {
+    response.render('k8s',
+        {
+            namespaces: namespaces
+        });
+});
 
 io.on('connection', (socket) => {
     socket.on('changeNamespace', (newNamespace) => namespace = newNamespace);
