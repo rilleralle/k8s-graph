@@ -1,0 +1,96 @@
+html, body {
+    height: 100%;
+    margin: 0;
+    font-family: "Lucida Console", Monaco, monospace;
+}
+
+input[type=checkbox] {
+    /* Double-sized Checkboxes */
+    -ms-transform: scale(2); /* IE */
+    -moz-transform: scale(2); /* FF */
+    -webkit-transform: scale(2); /* Safari and Chrome */
+    -o-transform: scale(2); /* Opera */
+}
+
+.controlls {
+    margin: 15px;
+    display: inline;
+    position: fixed;
+}
+
+div.tooltip {
+    position: absolute;
+    text-align: left;
+    padding: 4px;
+    background: ivory;
+    border-radius: 8px;
+    pointer-events: none;
+}
+
+.pulse {
+    animation: pulse 0.5s infinite;
+}
+
+@keyframes pulse {
+    0% {
+        stroke: black;
+    }
+    50% {
+        stroke: #ff1931;
+        stroke-width: 15;
+    }
+    100% {
+        stroke: black;
+    }
+}
+
+.notReady {
+    animation: notReady 0.5s infinite;
+}
+
+@keyframes notReady {
+    0% {
+        stroke: black;
+    }
+    50% {
+        stroke: #1e67ff;
+        stroke-width: 15;
+    }
+    100% {
+        stroke: black;
+    }
+}
+
+.start {
+    animation: start 2s infinite;
+}
+@keyframes start {
+    0% {
+        stroke: black;
+        stroke-opacity: 0;
+        opacity: 0.5;
+    }
+    100% {
+        stroke: #3fff47;
+        stroke-width: 30;
+        stroke-opacity: 1;
+        opacity: 1;
+    }
+}
+
+.delete {
+    animation: delete 2s infinite ease-in-out;
+}
+@keyframes delete {
+    0% {
+        stroke: #1e67ff;
+        stroke-width: 30;
+        stroke-opacity: 1;
+        opacity: 1;
+    }
+    100% {
+        stroke: #1e67ff;
+        stroke-opacity: 0.5;
+        opacity: 0.5;
+    }
+}

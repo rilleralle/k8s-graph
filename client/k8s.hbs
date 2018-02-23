@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>k8s graph</title>
+    <link rel="stylesheet" href="k8s.css">
+</head>
+<meta charset="utf-8">
+
+<body>
+<div class="controlls">
+    <input type="checkbox" onclick="toggleStickyObjects()">
+    <span>Sticky objects</span>
+
+    <input type="checkbox" onclick="toggleTextVisibility()" checked="true">
+    <span>Text visible</span>
+
+    <br><br>
+
+    <span>Namespace</span>
+    <select id="namespaces" onchange="changeNamespace(this.value)">
+        {{#each namespaces}}
+            <option value="{{this}}">{{this}}</option>
+        {{/each}}
+    </select>
+</div>
+
+<svg id="wrapper" width="100%" height="98%"></svg>
+
+<script src="/socket.io/socket.io.js"></script>
+<script type="text/javascript" src="/d3.v4.min.js"></script>
+<script type="text/javascript" src="/k8s.js"></script>
+
+</body>
+</html>
