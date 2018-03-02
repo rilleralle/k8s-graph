@@ -24,9 +24,6 @@ describe('Server', () => {
 
     afterEach(() => {
         this.ioSpy.resetHistory();
-    });
-
-    after(() => {
         this.underTest.stop();
     });
 
