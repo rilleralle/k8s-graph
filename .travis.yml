@@ -13,4 +13,4 @@ deploy:
   provider: script
   script: bash scripts/docker_deploy.sh
   on:
-    branch: develop
+    branch: master
