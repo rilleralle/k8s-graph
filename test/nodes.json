@@ -1,0 +1,1426 @@
+{
+  "kind": "NodeList",
+  "apiVersion": "v1",
+  "metadata": {
+    "selfLink": "/api/v1/nodes",
+    "resourceVersion": "1268055"
+  },
+  "items": [
+    {
+      "metadata": {
+        "name": "k8s-master",
+        "selfLink": "/api/v1/nodes/k8s-master",
+        "uid": "e8b2a1c5-ffb0-11e7-bdb9-fe703acf5ad1",
+        "resourceVersion": "1268054",
+        "creationTimestamp": "2018-01-22T20:14:54Z",
+        "labels": {
+          "kubernetes.io/hostname": "k8s-master",
+          "node-role.kubernetes.io/master": "",
+          "beta.kubernetes.io/arch": "arm64",
+          "beta.kubernetes.io/os": "linux"
+        },
+        "annotations": {
+          "flannel.alpha.coreos.com/public-ip": "192.168.11.1",
+          "node.alpha.kubernetes.io/ttl": "0",
+          "volumes.kubernetes.io/controller-managed-attach-detach": "true",
+          "flannel.alpha.coreos.com/backend-data": "null",
+          "flannel.alpha.coreos.com/backend-type": "",
+          "flannel.alpha.coreos.com/kube-subnet-manager": "true"
+        }
+      },
+      "spec": {
+        "podCIDR": "10.244.0.0/24",
+        "externalID": "k8s-master",
+        "taints": [
+          {
+            "key": "node-role.kubernetes.io/master",
+            "effect": "NoSchedule"
+          }
+        ]
+      },
+      "status": {
+        "capacity": {
+          "cpu": "4",
+          "memory": "2036444Ki",
+          "pods": "110"
+        },
+        "allocatable": {
+          "cpu": "4",
+          "memory": "1934044Ki",
+          "pods": "110"
+        },
+        "conditions": [
+          {
+            "type": "OutOfDisk",
+            "status": "False",
+            "lastHeartbeatTime": "2018-02-28T10:07:39Z",
+            "lastTransitionTime": "2018-01-22T20:14:50Z",
+            "reason": "KubeletHasSufficientDisk",
+            "message": "kubelet has sufficient disk space available"
+          },
+          {
+            "type": "MemoryPressure",
+            "status": "False",
+            "lastHeartbeatTime": "2018-02-28T10:07:39Z",
+            "lastTransitionTime": "2018-01-22T20:14:50Z",
+            "reason": "KubeletHasSufficientMemory",
+            "message": "kubelet has sufficient memory available"
+          },
+          {
+            "type": "DiskPressure",
+            "status": "False",
+            "lastHeartbeatTime": "2018-02-28T10:07:39Z",
+            "lastTransitionTime": "2018-01-22T20:14:50Z",
+            "reason": "KubeletHasNoDiskPressure",
+            "message": "kubelet has no disk pressure"
+          },
+          {
+            "type": "Ready",
+            "status": "True",
+            "lastHeartbeatTime": "2018-02-28T10:07:39Z",
+            "lastTransitionTime": "2018-01-22T20:24:17Z",
+            "reason": "KubeletReady",
+            "message": "kubelet is posting ready status. AppArmor enabled"
+          }
+        ],
+        "addresses": [
+          {
+            "type": "InternalIP",
+            "address": "192.168.11.1"
+          },
+          {
+            "type": "Hostname",
+            "address": "k8s-master"
+          }
+        ],
+        "daemonEndpoints": {
+          "kubeletEndpoint": {
+            "Port": 10250
+          }
+        },
+        "nodeInfo": {
+          "machineID": "52bd6ab18b195876dac9dd10584f4989",
+          "systemUUID": "52bd6ab18b195876dac9dd10584f4989",
+          "bootID": "00d2f4ea-c223-44b6-8a12-a87836de5f31",
+          "kernelVersion": "3.10.104",
+          "osImage": "Ubuntu 16.04.1 LTS",
+          "containerRuntimeVersion": "docker://1.13.1",
+          "kubeletVersion": "v1.9.2",
+          "kubeProxyVersion": "v1.9.2",
+          "operatingSystem": "linux",
+          "architecture": "arm64"
+        },
+        "images": [
+          {
+            "names": [
+              "gcr.io/google_containers/kube-apiserver-arm64@sha256:7c3de02d5717e9237789dc74eb7f7a69a3fdb88896b1e3364575fcfc0291f159",
+              "gcr.io/google_containers/kube-apiserver-arm64:v1.9.2"
+            ],
+            "sizeBytes": 204268256
+          },
+          {
+            "names": [
+              "gcr.io/google_containers/etcd-arm64@sha256:7c523c7302cf7285deee3c51975894611bab5c8a7e1d188e6aef620bd6a87062",
+              "gcr.io/google_containers/etcd-arm64:3.1.11"
+            ],
+            "sizeBytes": 194021316
+          },
+          {
+            "names": [
+              "gcr.io/google_containers/kube-controller-manager-arm64@sha256:da6730fe0b0001fcef3a2313a72f703b8f0566e766958289f447e6d18c587323",
+              "gcr.io/google_containers/kube-controller-manager-arm64:v1.9.2"
+            ],
+            "sizeBytes": 132481666
+          },
+          {
+            "names": [
+              "gcr.io/google_containers/kube-proxy-arm64@sha256:a51c18ab411a6fc766b8bbff2dbab7fbb8a29a2af9b1a34fdacb04c5e4664a2d",
+              "gcr.io/google_containers/kube-proxy-arm64:v1.9.2"
+            ],
+            "sizeBytes": 112135582
+          },
+          {
+            "names": [
+              "rilleralle/k8s-graph-arm64@sha256:dd9c60ee3ff461f85fb75f76e7900b2fdc818206111102ad555c21f235075c57"
+            ],
+            "sizeBytes": 102831931
+          },
+          {
+            "names": [
+              "rilleralle/k8s-graph-arm64@sha256:57c3b23b6f579b32a923baa43cc7ca2a1f40180349d66ab4ff9a622b8de0efac",
+              "rilleralle/k8s-graph-arm64:dev"
+            ],
+            "sizeBytes": 102829745
+          },
+          {
+            "names": [
+              "rilleralle/k8s-graph-arm64@sha256:09f0030643519965c9bed8cbb2cfa879f79c6c70f7cbe57b9db3b6e35860121d",
+              "rilleralle/k8s-test-microservice-arm64@sha256:09f0030643519965c9bed8cbb2cfa879f79c6c70f7cbe57b9db3b6e35860121d",
+              "rilleralle/k8s-test-microservice-arm64:dev"
+            ],
+            "sizeBytes": 102829537
+          },
+          {
+            "names": [
+              "rilleralle/k8s-graph-arm64@sha256:030b77cb024525c9084ad3588a28d720bd3a4a88030f10c1e77c4adc9d117e33"
+            ],
+            "sizeBytes": 102829461
+          },
+          {
+            "names": [
+              "rilleralle/k8s-graph-arm64@sha256:60d10a0a20c8bb9e93524996a05562cda01ec7dc3a334c6cf6c904e9f8d28cf0"
+            ],
+            "sizeBytes": 102828347
+          },
+          {
+            "names": [
+              "k8s.gcr.io/kubernetes-dashboard-arm@sha256:66027a8d10872324997228a2acbf959c4eaee4adc3b6a52421fbb3326b90808e",
+              "k8s.gcr.io/kubernetes-dashboard-arm:v1.8.2"
+            ],
+            "sizeBytes": 98231535
+          },
+          {
+            "names": [
+              "kubernetesdashboarddev/kubernetes-dashboard-arm@sha256:559c0ac5e0ea35cdc7223934fab78490b387aac050c4d6a0e71191f9216aa74d",
+              "kubernetesdashboarddev/kubernetes-dashboard-arm:head"
+            ],
+            "sizeBytes": 98231535
+          },
+          {
+            "names": [
+              "rilleralle/k8s-graph-arm64@sha256:16e1d2e029fe2485636d31d17b21ff29f85f583e55e6a472528b680dcf2a216e",
+              "rilleralle/k8s-graph-arm64:latest"
+            ],
+            "sizeBytes": 83321466
+          },
+          {
+            "names": [
+              "rilleralle/k8s-graph-arm64@sha256:5fee704d6f99774876d8c4ed40b499257ec8323357b373c1e1e1bdc6e9457659"
+            ],
+            "sizeBytes": 83320265
+          },
+          {
+            "names": [
+              "rilleralle/k8s-graph-arm64@sha256:59f9c6f9ca1ecb6a84c0825b2af853c91cbd081444c68da63bb63edaf62eb5ec"
+            ],
+            "sizeBytes": 83319260
+          },
+          {
+            "names": [
+              "rilleralle/k8s-graph-arm64@sha256:eb61d411601cde2cd132f49955af1507ea198b42038cab2902c9b5a24a81c785"
+            ],
+            "sizeBytes": 83316796
+          },
+          {
+            "names": [
+              "rilleralle/k8s-graph-arm64@sha256:ec42c51bcb047cc1bf9fa0ecdd5e4e0b427beef89641fad374e9448e87f66016"
+            ],
+            "sizeBytes": 83316701
+          },
+          {
+            "names": [
+              "rilleralle/k8s-graph-arm64@sha256:cf468487d6c348de1d959ac15a96d1180d14fc0a198740c650843490e665df50"
+            ],
+            "sizeBytes": 83315552
+          },
+          {
+            "names": [
+              "rilleralle/k8s-graph-arm64@sha256:642b6a1d122ffdda3e8a75b83e672e3e48ad8e6e6d2be464021f115a177059e3"
+            ],
+            "sizeBytes": 83314178
+          },
+          {
+            "names": [
+              "<none>@<none>",
+              "<none>:<none>"
+            ],
+            "sizeBytes": 82297761
+          },
+          {
+            "names": [
+              "rilleralle/k8s-test-microservice-arm64@sha256:157306798567104754937a98fb2ab7444440493019d31d0c057f993fd1d06aa7"
+            ],
+            "sizeBytes": 82293165
+          },
+          {
+            "names": [
+              "rilleralle/k8s-test-microservice-arm64@sha256:a9a6083e4952cb21b4809b1017d04981aab2175378481c09ce2913aadf3e25c8"
+            ],
+            "sizeBytes": 81261638
+          },
+          {
+            "names": [
+              "rilleralle/k8s-test-microservice-arm64@sha256:453090aa3313e745ee804bebe9a639603cb6cce38d1bb3ea8d0b613aa54c8d8f",
+              "rilleralle/k8s-test-microservice-arm64:v2"
+            ],
+            "sizeBytes": 80412133
+          },
+          {
+            "names": [
+              "rilleralle/k8s-test-microservice-arm64@sha256:2c8fc440b456c3d465c2df7dcc971b74298ef44eeb7a07a310b8e5678966e4fb",
+              "rilleralle/k8s-test-microservice-arm64:v1"
+            ],
+            "sizeBytes": 80412075
+          },
+          {
+            "names": [
+              "rilleralle/k8s-test-microservice-arm64@sha256:e7dd45ddcbb9b41b3a1a454e5d6e59e05ac4e455c641d34e31d79b203033f8df"
+            ],
+            "sizeBytes": 80410313
+          },
+          {
+            "names": [
+              "<none>@<none>",
+              "<none>:<none>"
+            ],
+            "sizeBytes": 80409110
+          },
+          {
+            "names": [
+              "rilleralle/k8s-test-microservice-arm64@sha256:2007e9399b499d7364f83f77421d7fc0ab910079669f1890963e338dcb6f6093"
+            ],
+            "sizeBytes": 79080337
+          },
+          {
+            "names": [
+              "rilleralle/k8s-test-microservice-arm64@sha256:c5533763179d083eda7d6af3103fc469e7324c08109290dc646d20545825cbe6"
+            ],
+            "sizeBytes": 79080290
+          },
+          {
+            "names": [
+              "rilleralle/k8s-test-microservice-arm64@sha256:aa7bb4a5b9745807d91f9c2a3523ef8de52637c7a1a2cc26c9c153f13c81cc92"
+            ],
+            "sizeBytes": 79077959
+          },
+          {
+            "names": [
+              "rilleralle/k8s-test-microservice-arm64@sha256:f68ac6107fca74e9f95291f71ce6a5626b635d533d6ff0e8f6a258ddfc66a640",
+              "rilleralle/k8s-test-microservice-arm64:latest"
+            ],
+            "sizeBytes": 79076703
+          },
+          {
+            "names": [
+              "rilleralle/k8s-test-microservice-arm64@sha256:52265b396f9d6063a2027f2b7f4cc4736264f7cb0f9f821acc007868a199faec"
+            ],
+            "sizeBytes": 79076556
+          },
+          {
+            "names": [
+              "rilleralle/k8s-test-microservice-arm64@sha256:38969ca3c9c546e785cd5d3d1c065d61f5f96aae62d485748651af383baa29d0"
+            ],
+            "sizeBytes": 79075234
+          },
+          {
+            "names": [
+              "rilleralle/k8s-test-microservice@sha256:f3216f698ba5ae6bb1deb3bee9ba579aee4852f4cb42118a7ff06fe9621c29a4",
+              "rilleralle/k8s-test-microservice:latest"
+            ],
+            "sizeBytes": 76461458
+          },
+          {
+            "names": [
+              "<none>@<none>",
+              "<none>:<none>"
+            ],
+            "sizeBytes": 68522196
+          },
+          {
+            "names": [
+              "rilleralle/kubectl-arm64@sha256:4680f5a054836b9964ee32efbe1418e6b152e5152ef637fa3b0474b96830239a",
+              "rilleralle/kubectl-arm64:latest"
+            ],
+            "sizeBytes": 68522196
+          },
+          {
+            "names": [
+              "<none>@<none>",
+              "<none>:<none>"
+            ],
+            "sizeBytes": 67666393
+          },
+          {
+            "names": [
+              "<none>@<none>",
+              "<none>:<none>"
+            ],
+            "sizeBytes": 66346654
+          },
+          {
+            "names": [
+              "node@sha256:b1e1f024dccf7058d2f55b21d6bf65c9cb932ba7bee2a24eca08ddb7c654312b",
+              "node:8-alpine"
+            ],
+            "sizeBytes": 66339688
+          },
+          {
+            "names": [
+              "rilleralle/k8s-test-microservice-arm64:v3"
+            ],
+            "sizeBytes": 66308036
+          },
+          {
+            "names": [
+              "node@sha256:bda0e2513f077b9b3898c504f5ef5c2b4357f631cc05c5882d5935496a01df2a",
+              "node:9.5.0-alpine"
+            ],
+            "sizeBytes": 66304163
+          },
+          {
+            "names": [
+              "gcr.io/google_containers/kube-scheduler-arm64@sha256:f684230b12fecc8bda2cb8420d0685287950bfcdd495ca1b2cc79b65cbea109f",
+              "gcr.io/google_containers/kube-scheduler-arm64:v1.9.2"
+            ],
+            "sizeBytes": 60325202
+          },
+          {
+            "names": [
+              "gcr.io/google_containers/k8s-dns-kube-dns-arm64@sha256:8bce6ed3788f9a51e51d79c9dfa630b6b2b47fb72edf7d390eebca1231affe0b",
+              "gcr.io/google_containers/k8s-dns-kube-dns-arm64:1.14.7"
+            ],
+            "sizeBytes": 49191977
+          },
+          {
+            "names": [
+              "gcr.io/google_containers/k8s-dns-dnsmasq-nanny-arm64@sha256:9bd2f2dfb2e5dd0dbb927d1b3375a532d412c9a95dfe0779371494be44efaba6",
+              "gcr.io/google_containers/k8s-dns-dnsmasq-nanny-arm64:1.14.7"
+            ],
+            "sizeBytes": 42547601
+          },
+          {
+            "names": [
+              "gcr.io/google_containers/k8s-dns-sidecar-arm64@sha256:8b4efd3b6586e66035e1dedcac58024b86b47408db643d02b0921c8b6ceecd9a",
+              "gcr.io/google_containers/k8s-dns-sidecar-arm64:1.14.7"
+            ],
+            "sizeBytes": 41097639
+          },
+          {
+            "names": [
+              "quay.io/coreos/flannel@sha256:a5adf4dc63c660c8255e85cbc3c65adddce4f160b4c57bf57a47c41e21675aab",
+              "quay.io/coreos/flannel:v0.9.1-arm64"
+            ],
+            "sizeBytes": 38030232
+          },
+          {
+            "names": [
+              "<none>@<none>",
+              "<none>:<none>"
+            ],
+            "sizeBytes": 3964490
+          },
+          {
+            "names": [
+              "alpine@sha256:7df6db5aa61ae9480f52f0b3a06a140ab98d427f86d8d5de0bedab9b8df6b1c0",
+              "alpine:latest"
+            ],
+            "sizeBytes": 3964490
+          },
+          {
+            "names": [
+              "<none>@<none>",
+              "<none>:<none>"
+            ],
+            "sizeBytes": 3964490
+          },
+          {
+            "names": [
+              "<none>@<none>",
+              "<none>:<none>"
+            ],
+            "sizeBytes": 3964490
+          },
+          {
+            "names": [
+              "gcr.io/google_containers/pause-arm64@sha256:bfc848340ea91ab2b373c706e267d072b0d8c1fdd0b3b7b64b01801f57090e9f",
+              "gcr.io/google_containers/pause-arm64:3.0"
+            ],
+            "sizeBytes": 541776
+          }
+        ]
+      }
+    },
+    {
+      "metadata": {
+        "name": "k8s-minion1",
+        "selfLink": "/api/v1/nodes/k8s-minion1",
+        "uid": "7a67ef1e-ffb9-11e7-bdb9-fe703acf5ad1",
+        "resourceVersion": "1268055",
+        "creationTimestamp": "2018-01-22T21:16:14Z",
+        "labels": {
+          "beta.kubernetes.io/os": "linux",
+          "kubernetes.io/hostname": "k8s-minion1",
+          "beta.kubernetes.io/arch": "arm64"
+        },
+        "annotations": {
+          "volumes.kubernetes.io/controller-managed-attach-detach": "true",
+          "flannel.alpha.coreos.com/backend-data": "null",
+          "flannel.alpha.coreos.com/backend-type": "",
+          "flannel.alpha.coreos.com/kube-subnet-manager": "true",
+          "flannel.alpha.coreos.com/public-ip": "192.168.0.248",
+          "node.alpha.kubernetes.io/ttl": "0"
+        }
+      },
+      "spec": {
+        "podCIDR": "10.244.2.0/24",
+        "externalID": "k8s-minion1"
+      },
+      "status": {
+        "capacity": {
+          "pods": "110",
+          "cpu": "4",
+          "memory": "2036460Ki"
+        },
+        "allocatable": {
+          "cpu": "4",
+          "memory": "1934060Ki",
+          "pods": "110"
+        },
+        "conditions": [
+          {
+            "type": "OutOfDisk",
+            "status": "False",
+            "lastHeartbeatTime": "2018-02-28T10:07:40Z",
+            "lastTransitionTime": "2018-01-22T21:16:14Z",
+            "reason": "KubeletHasSufficientDisk",
+            "message": "kubelet has sufficient disk space available"
+          },
+          {
+            "type": "MemoryPressure",
+            "status": "False",
+            "lastHeartbeatTime": "2018-02-28T10:07:40Z",
+            "lastTransitionTime": "2018-02-10T23:23:37Z",
+            "reason": "KubeletHasSufficientMemory",
+            "message": "kubelet has sufficient memory available"
+          },
+          {
+            "type": "DiskPressure",
+            "status": "False",
+            "lastHeartbeatTime": "2018-02-28T10:07:40Z",
+            "lastTransitionTime": "2018-02-10T23:23:37Z",
+            "reason": "KubeletHasNoDiskPressure",
+            "message": "kubelet has no disk pressure"
+          },
+          {
+            "type": "Ready",
+            "status": "True",
+            "lastHeartbeatTime": "2018-02-28T10:07:40Z",
+            "lastTransitionTime": "2018-02-20T21:28:20Z",
+            "reason": "KubeletReady",
+            "message": "kubelet is posting ready status. AppArmor enabled"
+          }
+        ],
+        "addresses": [
+          {
+            "type": "InternalIP",
+            "address": "192.168.11.2"
+          },
+          {
+            "type": "Hostname",
+            "address": "k8s-minion1"
+          }
+        ],
+        "daemonEndpoints": {
+          "kubeletEndpoint": {
+            "Port": 10250
+          }
+        },
+        "nodeInfo": {
+          "machineID": "8a7eae2accb7977bad9de1e15856980a",
+          "systemUUID": "8a7eae2accb7977bad9de1e15856980a",
+          "bootID": "b569b755-3f07-4f85-9820-d9ebaabb2527",
+          "kernelVersion": "3.10.104-2-pine64-longsleep",
+          "osImage": "Ubuntu 16.04.3 LTS",
+          "containerRuntimeVersion": "docker://1.13.1",
+          "kubeletVersion": "v1.9.2",
+          "kubeProxyVersion": "v1.9.2",
+          "operatingSystem": "linux",
+          "architecture": "arm64"
+        },
+        "images": [
+          {
+            "names": [
+              "gcr.io/google-containers/kubectl@sha256:15c6ba4985e355bad2022feffabf633abc43b3d23cc2ace37343c91eb2219879",
+              "gcr.io/google-containers/kubectl:v1.0.7"
+            ],
+            "sizeBytes": 163933771
+          },
+          {
+            "names": [
+              "gcr.io/google_containers/kube-proxy-arm64@sha256:a51c18ab411a6fc766b8bbff2dbab7fbb8a29a2af9b1a34fdacb04c5e4664a2d",
+              "gcr.io/google_containers/kube-proxy-arm64:v1.9.2"
+            ],
+            "sizeBytes": 112135582
+          },
+          {
+            "names": [
+              "rilleralle/k8s-graph-arm64@sha256:09f0030643519965c9bed8cbb2cfa879f79c6c70f7cbe57b9db3b6e35860121d"
+            ],
+            "sizeBytes": 102829537
+          },
+          {
+            "names": [
+              "rilleralle/k8s-graph-arm64@sha256:60d10a0a20c8bb9e93524996a05562cda01ec7dc3a334c6cf6c904e9f8d28cf0",
+              "rilleralle/k8s-graph-arm64:dev"
+            ],
+            "sizeBytes": 102828347
+          },
+          {
+            "names": [
+              "rilleralle/k8s-graph-arm64@sha256:16e1d2e029fe2485636d31d17b21ff29f85f583e55e6a472528b680dcf2a216e",
+              "rilleralle/k8s-graph-arm64:latest"
+            ],
+            "sizeBytes": 83321466
+          },
+          {
+            "names": [
+              "rilleralle/k8s-graph-arm64@sha256:eb61d411601cde2cd132f49955af1507ea198b42038cab2902c9b5a24a81c785"
+            ],
+            "sizeBytes": 83316796
+          },
+          {
+            "names": [
+              "rilleralle/k8s-graph-arm64@sha256:ec42c51bcb047cc1bf9fa0ecdd5e4e0b427beef89641fad374e9448e87f66016"
+            ],
+            "sizeBytes": 83316701
+          },
+          {
+            "names": [
+              "rilleralle/k8s-graph-arm64@sha256:cf468487d6c348de1d959ac15a96d1180d14fc0a198740c650843490e665df50"
+            ],
+            "sizeBytes": 83315552
+          },
+          {
+            "names": [
+              "rilleralle/k8s-graph-arm64@sha256:642b6a1d122ffdda3e8a75b83e672e3e48ad8e6e6d2be464021f115a177059e3"
+            ],
+            "sizeBytes": 83314178
+          },
+          {
+            "names": [
+              "rilleralle/k8s-test-microservice-arm64@sha256:2007e9399b499d7364f83f77421d7fc0ab910079669f1890963e338dcb6f6093",
+              "rilleralle/k8s-test-microservice-arm64:v1"
+            ],
+            "sizeBytes": 79080337
+          },
+          {
+            "names": [
+              "rilleralle/k8s-test-microservice-arm64@sha256:c5533763179d083eda7d6af3103fc469e7324c08109290dc646d20545825cbe6",
+              "rilleralle/k8s-test-microservice-arm64:v2"
+            ],
+            "sizeBytes": 79080290
+          },
+          {
+            "names": [
+              "rilleralle/k8s-test-microservice-arm64@sha256:aa7bb4a5b9745807d91f9c2a3523ef8de52637c7a1a2cc26c9c153f13c81cc92"
+            ],
+            "sizeBytes": 79077959
+          },
+          {
+            "names": [
+              "rilleralle/k8s-test-microservice-arm64@sha256:f68ac6107fca74e9f95291f71ce6a5626b635d533d6ff0e8f6a258ddfc66a640",
+              "rilleralle/k8s-test-microservice-arm64:latest"
+            ],
+            "sizeBytes": 79076703
+          },
+          {
+            "names": [
+              "rilleralle/k8s-test-microservice-arm64@sha256:52265b396f9d6063a2027f2b7f4cc4736264f7cb0f9f821acc007868a199faec"
+            ],
+            "sizeBytes": 79076556
+          },
+          {
+            "names": [
+              "rilleralle/k8s-test-microservice-arm64@sha256:38969ca3c9c546e785cd5d3d1c065d61f5f96aae62d485748651af383baa29d0"
+            ],
+            "sizeBytes": 79075234
+          },
+          {
+            "names": [
+              "rilleralle/k8s-test-microservice@sha256:f3216f698ba5ae6bb1deb3bee9ba579aee4852f4cb42118a7ff06fe9621c29a4",
+              "rilleralle/k8s-test-microservice:latest"
+            ],
+            "sizeBytes": 76461458
+          },
+          {
+            "names": [
+              "rilleralle/kubectl-arm64@sha256:4680f5a054836b9964ee32efbe1418e6b152e5152ef637fa3b0474b96830239a",
+              "rilleralle/kubectl-arm64:latest"
+            ],
+            "sizeBytes": 68522196
+          },
+          {
+            "names": [
+              "quay.io/coreos/flannel@sha256:a5adf4dc63c660c8255e85cbc3c65adddce4f160b4c57bf57a47c41e21675aab",
+              "quay.io/coreos/flannel:v0.9.1-arm64"
+            ],
+            "sizeBytes": 38030232
+          },
+          {
+            "names": [
+              "gcr.io/google_containers/kubectl@sha256:0edbc41c8b59670e13be3ee5387b897a0b62d2319489fb8c20f1ebe49cbbd7a2",
+              "gcr.io/google_containers/kubectl:v0.18.0-120-gaeb4ac55ad12b1-dirty"
+            ],
+            "sizeBytes": 20000336
+          },
+          {
+            "names": [
+              "gcr.io/google_containers/pause-arm64@sha256:bfc848340ea91ab2b373c706e267d072b0d8c1fdd0b3b7b64b01801f57090e9f",
+              "gcr.io/google_containers/pause-arm64:3.0"
+            ],
+            "sizeBytes": 541776
+          }
+        ]
+      }
+    },
+    {
+      "metadata": {
+        "name": "k8s-minion2",
+        "selfLink": "/api/v1/nodes/k8s-minion2",
+        "uid": "8ac80114-0601-11e8-a855-8ed62561c844",
+        "resourceVersion": "1267206",
+        "creationTimestamp": "2018-01-30T21:07:12Z",
+        "labels": {
+          "beta.kubernetes.io/arch": "arm64",
+          "beta.kubernetes.io/os": "linux",
+          "kubernetes.io/hostname": "k8s-minion2"
+        },
+        "annotations": {
+          "node.alpha.kubernetes.io/ttl": "0",
+          "volumes.kubernetes.io/controller-managed-attach-detach": "true",
+          "flannel.alpha.coreos.com/backend-data": "null",
+          "flannel.alpha.coreos.com/backend-type": "",
+          "flannel.alpha.coreos.com/kube-subnet-manager": "true",
+          "flannel.alpha.coreos.com/public-ip": "192.168.0.185"
+        }
+      },
+      "spec": {
+        "podCIDR": "10.244.5.0/24",
+        "externalID": "k8s-minion2"
+      },
+      "status": {
+        "capacity": {
+          "cpu": "4",
+          "memory": "2036460Ki",
+          "pods": "110"
+        },
+        "allocatable": {
+          "cpu": "4",
+          "memory": "1934060Ki",
+          "pods": "110"
+        },
+        "conditions": [
+          {
+            "type": "OutOfDisk",
+            "status": "False",
+            "lastHeartbeatTime": "2018-02-28T09:55:13Z",
+            "lastTransitionTime": "2018-01-30T21:07:12Z",
+            "reason": "KubeletHasSufficientDisk",
+            "message": "kubelet has sufficient disk space available"
+          },
+          {
+            "type": "MemoryPressure",
+            "status": "Unknown",
+            "lastHeartbeatTime": "2018-02-28T09:55:13Z",
+            "lastTransitionTime": "2018-02-28T09:55:56Z",
+            "reason": "NodeStatusUnknown",
+            "message": "Kubelet stopped posting node status."
+          },
+          {
+            "type": "DiskPressure",
+            "status": "Unknown",
+            "lastHeartbeatTime": "2018-02-28T09:55:13Z",
+            "lastTransitionTime": "2018-02-28T09:55:56Z",
+            "reason": "NodeStatusUnknown",
+            "message": "Kubelet stopped posting node status."
+          },
+          {
+            "type": "Ready",
+            "status": "Unknown",
+            "lastHeartbeatTime": "2018-02-28T09:55:13Z",
+            "lastTransitionTime": "2018-02-28T09:55:56Z",
+            "reason": "NodeStatusUnknown",
+            "message": "Kubelet stopped posting node status."
+          }
+        ],
+        "addresses": [
+          {
+            "type": "InternalIP",
+            "address": "192.168.0.185"
+          },
+          {
+            "type": "Hostname",
+            "address": "k8s-minion2"
+          }
+        ],
+        "daemonEndpoints": {
+          "kubeletEndpoint": {
+            "Port": 10250
+          }
+        },
+        "nodeInfo": {
+          "machineID": "8a7eae2accb7977bad9de1e15856980a",
+          "systemUUID": "8a7eae2accb7977bad9de1e15856980a",
+          "bootID": "bd6637b7-9dd1-497e-b98c-e9bf71fd4ab1",
+          "kernelVersion": "3.10.104-2-pine64-longsleep",
+          "osImage": "Ubuntu 16.04.1 LTS",
+          "containerRuntimeVersion": "docker://1.13.1",
+          "kubeletVersion": "v1.9.2",
+          "kubeProxyVersion": "v1.9.2",
+          "operatingSystem": "linux",
+          "architecture": "arm64"
+        },
+        "images": [
+          {
+            "names": [
+              "gcr.io/google_containers/kube-proxy-arm64@sha256:a51c18ab411a6fc766b8bbff2dbab7fbb8a29a2af9b1a34fdacb04c5e4664a2d",
+              "gcr.io/google_containers/kube-proxy-arm64:v1.9.2"
+            ],
+            "sizeBytes": 112135582
+          },
+          {
+            "names": [
+              "rilleralle/k8s-graph-arm64@sha256:16e1d2e029fe2485636d31d17b21ff29f85f583e55e6a472528b680dcf2a216e",
+              "rilleralle/k8s-graph-arm64:latest"
+            ],
+            "sizeBytes": 83321466
+          },
+          {
+            "names": [
+              "rilleralle/k8s-graph-arm64@sha256:5fee704d6f99774876d8c4ed40b499257ec8323357b373c1e1e1bdc6e9457659"
+            ],
+            "sizeBytes": 83320265
+          },
+          {
+            "names": [
+              "rilleralle/k8s-graph-arm64@sha256:59f9c6f9ca1ecb6a84c0825b2af853c91cbd081444c68da63bb63edaf62eb5ec"
+            ],
+            "sizeBytes": 83319260
+          },
+          {
+            "names": [
+              "rilleralle/k8s-graph-arm64@sha256:ec42c51bcb047cc1bf9fa0ecdd5e4e0b427beef89641fad374e9448e87f66016"
+            ],
+            "sizeBytes": 83316701
+          },
+          {
+            "names": [
+              "rilleralle/k8s-test-microservice-arm64@sha256:2007e9399b499d7364f83f77421d7fc0ab910079669f1890963e338dcb6f6093",
+              "rilleralle/k8s-test-microservice-arm64:v1"
+            ],
+            "sizeBytes": 79080337
+          },
+          {
+            "names": [
+              "rilleralle/k8s-test-microservice-arm64@sha256:c5533763179d083eda7d6af3103fc469e7324c08109290dc646d20545825cbe6",
+              "rilleralle/k8s-test-microservice-arm64:v2"
+            ],
+            "sizeBytes": 79080290
+          },
+          {
+            "names": [
+              "rilleralle/k8s-test-microservice-arm64@sha256:aa7bb4a5b9745807d91f9c2a3523ef8de52637c7a1a2cc26c9c153f13c81cc92"
+            ],
+            "sizeBytes": 79077959
+          },
+          {
+            "names": [
+              "rilleralle/k8s-test-microservice-arm64@sha256:f68ac6107fca74e9f95291f71ce6a5626b635d533d6ff0e8f6a258ddfc66a640",
+              "rilleralle/k8s-test-microservice-arm64:latest"
+            ],
+            "sizeBytes": 79076703
+          },
+          {
+            "names": [
+              "rilleralle/k8s-test-microservice-arm64@sha256:52265b396f9d6063a2027f2b7f4cc4736264f7cb0f9f821acc007868a199faec"
+            ],
+            "sizeBytes": 79076556
+          },
+          {
+            "names": [
+              "rilleralle/k8s-test-microservice-arm64@sha256:38969ca3c9c546e785cd5d3d1c065d61f5f96aae62d485748651af383baa29d0"
+            ],
+            "sizeBytes": 79075234
+          },
+          {
+            "names": [
+              "rilleralle/kubectl-arm64@sha256:4680f5a054836b9964ee32efbe1418e6b152e5152ef637fa3b0474b96830239a",
+              "rilleralle/kubectl-arm64:latest"
+            ],
+            "sizeBytes": 68522196
+          },
+          {
+            "names": [
+              "quay.io/coreos/flannel@sha256:a5adf4dc63c660c8255e85cbc3c65adddce4f160b4c57bf57a47c41e21675aab",
+              "quay.io/coreos/flannel:v0.9.1-arm64"
+            ],
+            "sizeBytes": 38030232
+          },
+          {
+            "names": [
+              "gcr.io/google_containers/pause-arm64@sha256:bfc848340ea91ab2b373c706e267d072b0d8c1fdd0b3b7b64b01801f57090e9f",
+              "gcr.io/google_containers/pause-arm64:3.0"
+            ],
+            "sizeBytes": 541776
+          }
+        ]
+      }
+    },
+    {
+      "metadata": {
+        "name": "k8s-minion3",
+        "selfLink": "/api/v1/nodes/k8s-minion3",
+        "uid": "6906de2b-0540-11e8-aad5-562e13d68db9",
+        "resourceVersion": "1268048",
+        "creationTimestamp": "2018-01-29T22:04:43Z",
+        "labels": {
+          "beta.kubernetes.io/arch": "arm64",
+          "beta.kubernetes.io/os": "linux",
+          "kubernetes.io/hostname": "k8s-minion3"
+        },
+        "annotations": {
+          "flannel.alpha.coreos.com/backend-data": "null",
+          "flannel.alpha.coreos.com/backend-type": "",
+          "flannel.alpha.coreos.com/kube-subnet-manager": "true",
+          "flannel.alpha.coreos.com/public-ip": "192.168.0.150",
+          "node.alpha.kubernetes.io/ttl": "0",
+          "volumes.kubernetes.io/controller-managed-attach-detach": "true"
+        }
+      },
+      "spec": {
+        "podCIDR": "10.244.1.0/24",
+        "externalID": "k8s-minion3"
+      },
+      "status": {
+        "capacity": {
+          "cpu": "4",
+          "memory": "2036460Ki",
+          "pods": "110"
+        },
+        "allocatable": {
+          "cpu": "4",
+          "memory": "1934060Ki",
+          "pods": "110"
+        },
+        "conditions": [
+          {
+            "type": "OutOfDisk",
+            "status": "False",
+            "lastHeartbeatTime": "2018-02-28T10:07:35Z",
+            "lastTransitionTime": "2018-01-29T22:04:43Z",
+            "reason": "KubeletHasSufficientDisk",
+            "message": "kubelet has sufficient disk space available"
+          },
+          {
+            "type": "MemoryPressure",
+            "status": "False",
+            "lastHeartbeatTime": "2018-02-28T10:07:35Z",
+            "lastTransitionTime": "2018-02-10T20:34:40Z",
+            "reason": "KubeletHasSufficientMemory",
+            "message": "kubelet has sufficient memory available"
+          },
+          {
+            "type": "DiskPressure",
+            "status": "False",
+            "lastHeartbeatTime": "2018-02-28T10:07:35Z",
+            "lastTransitionTime": "2018-02-10T20:34:40Z",
+            "reason": "KubeletHasNoDiskPressure",
+            "message": "kubelet has no disk pressure"
+          },
+          {
+            "type": "Ready",
+            "status": "True",
+            "lastHeartbeatTime": "2018-02-28T10:07:35Z",
+            "lastTransitionTime": "2018-02-10T20:34:40Z",
+            "reason": "KubeletReady",
+            "message": "kubelet is posting ready status. AppArmor enabled"
+          }
+        ],
+        "addresses": [
+          {
+            "type": "InternalIP",
+            "address": "192.168.11.4"
+          },
+          {
+            "type": "Hostname",
+            "address": "k8s-minion3"
+          }
+        ],
+        "daemonEndpoints": {
+          "kubeletEndpoint": {
+            "Port": 10250
+          }
+        },
+        "nodeInfo": {
+          "machineID": "8a7eae2accb7977bad9de1e15856980a",
+          "systemUUID": "8a7eae2accb7977bad9de1e15856980a",
+          "bootID": "1a25fc19-a44b-4655-888f-a9dbe959ebb4",
+          "kernelVersion": "3.10.104-2-pine64-longsleep",
+          "osImage": "Ubuntu 16.04.1 LTS",
+          "containerRuntimeVersion": "docker://1.13.1",
+          "kubeletVersion": "v1.9.2",
+          "kubeProxyVersion": "v1.9.2",
+          "operatingSystem": "linux",
+          "architecture": "arm64"
+        },
+        "images": [
+          {
+            "names": [
+              "gcr.io/google_containers/kube-proxy-arm64@sha256:a51c18ab411a6fc766b8bbff2dbab7fbb8a29a2af9b1a34fdacb04c5e4664a2d",
+              "gcr.io/google_containers/kube-proxy-arm64:v1.9.2"
+            ],
+            "sizeBytes": 112135582
+          },
+          {
+            "names": [
+              "rilleralle/k8s-graph-arm64@sha256:dd9c60ee3ff461f85fb75f76e7900b2fdc818206111102ad555c21f235075c57"
+            ],
+            "sizeBytes": 102831931
+          },
+          {
+            "names": [
+              "rilleralle/k8s-graph-arm64@sha256:57c3b23b6f579b32a923baa43cc7ca2a1f40180349d66ab4ff9a622b8de0efac",
+              "rilleralle/k8s-graph-arm64:dev"
+            ],
+            "sizeBytes": 102829745
+          },
+          {
+            "names": [
+              "rilleralle/k8s-graph-arm64@sha256:16e1d2e029fe2485636d31d17b21ff29f85f583e55e6a472528b680dcf2a216e",
+              "rilleralle/k8s-graph-arm64:latest"
+            ],
+            "sizeBytes": 83321466
+          },
+          {
+            "names": [
+              "rilleralle/k8s-graph-arm64@sha256:ec42c51bcb047cc1bf9fa0ecdd5e4e0b427beef89641fad374e9448e87f66016"
+            ],
+            "sizeBytes": 83316701
+          },
+          {
+            "names": [
+              "rilleralle/k8s-test-microservice-arm64@sha256:2007e9399b499d7364f83f77421d7fc0ab910079669f1890963e338dcb6f6093",
+              "rilleralle/k8s-test-microservice-arm64:v1"
+            ],
+            "sizeBytes": 79080337
+          },
+          {
+            "names": [
+              "rilleralle/k8s-test-microservice-arm64@sha256:c5533763179d083eda7d6af3103fc469e7324c08109290dc646d20545825cbe6",
+              "rilleralle/k8s-test-microservice-arm64:v2"
+            ],
+            "sizeBytes": 79080290
+          },
+          {
+            "names": [
+              "rilleralle/k8s-test-microservice-arm64@sha256:aa7bb4a5b9745807d91f9c2a3523ef8de52637c7a1a2cc26c9c153f13c81cc92"
+            ],
+            "sizeBytes": 79077959
+          },
+          {
+            "names": [
+              "rilleralle/k8s-test-microservice-arm64@sha256:f68ac6107fca74e9f95291f71ce6a5626b635d533d6ff0e8f6a258ddfc66a640",
+              "rilleralle/k8s-test-microservice-arm64:latest"
+            ],
+            "sizeBytes": 79076703
+          },
+          {
+            "names": [
+              "rilleralle/k8s-test-microservice-arm64@sha256:52265b396f9d6063a2027f2b7f4cc4736264f7cb0f9f821acc007868a199faec"
+            ],
+            "sizeBytes": 79076556
+          },
+          {
+            "names": [
+              "rilleralle/k8s-test-microservice-arm64@sha256:38969ca3c9c546e785cd5d3d1c065d61f5f96aae62d485748651af383baa29d0"
+            ],
+            "sizeBytes": 79075234
+          },
+          {
+            "names": [
+              "rilleralle/kubectl-arm64@sha256:4680f5a054836b9964ee32efbe1418e6b152e5152ef637fa3b0474b96830239a",
+              "rilleralle/kubectl-arm64:latest"
+            ],
+            "sizeBytes": 68522196
+          },
+          {
+            "names": [
+              "quay.io/coreos/flannel@sha256:a5adf4dc63c660c8255e85cbc3c65adddce4f160b4c57bf57a47c41e21675aab",
+              "quay.io/coreos/flannel:v0.9.1-arm64"
+            ],
+            "sizeBytes": 38030232
+          },
+          {
+            "names": [
+              "gcr.io/google_containers/pause-arm64@sha256:bfc848340ea91ab2b373c706e267d072b0d8c1fdd0b3b7b64b01801f57090e9f",
+              "gcr.io/google_containers/pause-arm64:3.0"
+            ],
+            "sizeBytes": 541776
+          }
+        ]
+      }
+    },
+    {
+      "metadata": {
+        "name": "k8s-minion4",
+        "selfLink": "/api/v1/nodes/k8s-minion4",
+        "uid": "37d9c93d-05ff-11e8-a855-8ed62561c844",
+        "resourceVersion": "1268051",
+        "creationTimestamp": "2018-01-30T20:50:34Z",
+        "labels": {
+          "beta.kubernetes.io/os": "linux",
+          "kubernetes.io/hostname": "k8s-minion4",
+          "beta.kubernetes.io/arch": "arm64"
+        },
+        "annotations": {
+          "flannel.alpha.coreos.com/kube-subnet-manager": "true",
+          "flannel.alpha.coreos.com/public-ip": "192.168.0.178",
+          "node.alpha.kubernetes.io/ttl": "0",
+          "volumes.kubernetes.io/controller-managed-attach-detach": "true",
+          "flannel.alpha.coreos.com/backend-data": "null",
+          "flannel.alpha.coreos.com/backend-type": ""
+        }
+      },
+      "spec": {
+        "podCIDR": "10.244.3.0/24",
+        "externalID": "k8s-minion4"
+      },
+      "status": {
+        "capacity": {
+          "cpu": "4",
+          "memory": "2036460Ki",
+          "pods": "110"
+        },
+        "allocatable": {
+          "cpu": "4",
+          "memory": "1934060Ki",
+          "pods": "110"
+        },
+        "conditions": [
+          {
+            "type": "OutOfDisk",
+            "status": "False",
+            "lastHeartbeatTime": "2018-02-28T10:07:39Z",
+            "lastTransitionTime": "2018-01-30T20:50:34Z",
+            "reason": "KubeletHasSufficientDisk",
+            "message": "kubelet has sufficient disk space available"
+          },
+          {
+            "type": "MemoryPressure",
+            "status": "False",
+            "lastHeartbeatTime": "2018-02-28T10:07:39Z",
+            "lastTransitionTime": "2018-02-28T10:01:46Z",
+            "reason": "KubeletHasSufficientMemory",
+            "message": "kubelet has sufficient memory available"
+          },
+          {
+            "type": "DiskPressure",
+            "status": "False",
+            "lastHeartbeatTime": "2018-02-28T10:07:39Z",
+            "lastTransitionTime": "2018-02-28T10:01:46Z",
+            "reason": "KubeletHasNoDiskPressure",
+            "message": "kubelet has no disk pressure"
+          },
+          {
+            "type": "Ready",
+            "status": "True",
+            "lastHeartbeatTime": "2018-02-28T10:07:39Z",
+            "lastTransitionTime": "2018-02-28T10:01:46Z",
+            "reason": "KubeletReady",
+            "message": "kubelet is posting ready status. AppArmor enabled"
+          }
+        ],
+        "addresses": [
+          {
+            "type": "InternalIP",
+            "address": "192.168.0.178"
+          },
+          {
+            "type": "Hostname",
+            "address": "k8s-minion4"
+          }
+        ],
+        "daemonEndpoints": {
+          "kubeletEndpoint": {
+            "Port": 10250
+          }
+        },
+        "nodeInfo": {
+          "machineID": "8a7eae2accb7977bad9de1e15856980a",
+          "systemUUID": "8a7eae2accb7977bad9de1e15856980a",
+          "bootID": "616c6951-c2b9-4311-978f-d906dd61a9ff",
+          "kernelVersion": "3.10.104-2-pine64-longsleep",
+          "osImage": "Ubuntu 16.04.1 LTS",
+          "containerRuntimeVersion": "docker://1.13.1",
+          "kubeletVersion": "v1.9.2",
+          "kubeProxyVersion": "v1.9.2",
+          "operatingSystem": "linux",
+          "architecture": "arm64"
+        },
+        "images": [
+          {
+            "names": [
+              "gcr.io/google_containers/kube-proxy-arm64@sha256:a51c18ab411a6fc766b8bbff2dbab7fbb8a29a2af9b1a34fdacb04c5e4664a2d",
+              "gcr.io/google_containers/kube-proxy-arm64:v1.9.2"
+            ],
+            "sizeBytes": 112135582
+          },
+          {
+            "names": [
+              "rilleralle/k8s-graph-arm64@sha256:16e1d2e029fe2485636d31d17b21ff29f85f583e55e6a472528b680dcf2a216e",
+              "rilleralle/k8s-graph-arm64:latest"
+            ],
+            "sizeBytes": 83321466
+          },
+          {
+            "names": [
+              "rilleralle/k8s-graph-arm64@sha256:5fee704d6f99774876d8c4ed40b499257ec8323357b373c1e1e1bdc6e9457659"
+            ],
+            "sizeBytes": 83320265
+          },
+          {
+            "names": [
+              "rilleralle/k8s-test-microservice-arm64@sha256:2007e9399b499d7364f83f77421d7fc0ab910079669f1890963e338dcb6f6093",
+              "rilleralle/k8s-test-microservice-arm64:v1"
+            ],
+            "sizeBytes": 79080337
+          },
+          {
+            "names": [
+              "rilleralle/k8s-test-microservice-arm64@sha256:c5533763179d083eda7d6af3103fc469e7324c08109290dc646d20545825cbe6",
+              "rilleralle/k8s-test-microservice-arm64:v2"
+            ],
+            "sizeBytes": 79080290
+          },
+          {
+            "names": [
+              "rilleralle/k8s-test-microservice-arm64@sha256:aa7bb4a5b9745807d91f9c2a3523ef8de52637c7a1a2cc26c9c153f13c81cc92"
+            ],
+            "sizeBytes": 79077959
+          },
+          {
+            "names": [
+              "rilleralle/k8s-test-microservice-arm64@sha256:f68ac6107fca74e9f95291f71ce6a5626b635d533d6ff0e8f6a258ddfc66a640",
+              "rilleralle/k8s-test-microservice-arm64:latest"
+            ],
+            "sizeBytes": 79076703
+          },
+          {
+            "names": [
+              "rilleralle/k8s-test-microservice-arm64@sha256:52265b396f9d6063a2027f2b7f4cc4736264f7cb0f9f821acc007868a199faec"
+            ],
+            "sizeBytes": 79076556
+          },
+          {
+            "names": [
+              "rilleralle/k8s-test-microservice-arm64@sha256:38969ca3c9c546e785cd5d3d1c065d61f5f96aae62d485748651af383baa29d0"
+            ],
+            "sizeBytes": 79075234
+          },
+          {
+            "names": [
+              "rilleralle/kubectl-arm64@sha256:4680f5a054836b9964ee32efbe1418e6b152e5152ef637fa3b0474b96830239a",
+              "rilleralle/kubectl-arm64:latest"
+            ],
+            "sizeBytes": 68522196
+          },
+          {
+            "names": [
+              "quay.io/coreos/flannel@sha256:a5adf4dc63c660c8255e85cbc3c65adddce4f160b4c57bf57a47c41e21675aab",
+              "quay.io/coreos/flannel:v0.9.1-arm64"
+            ],
+            "sizeBytes": 38030232
+          },
+          {
+            "names": [
+              "gcr.io/google_containers/pause-arm64@sha256:bfc848340ea91ab2b373c706e267d072b0d8c1fdd0b3b7b64b01801f57090e9f",
+              "gcr.io/google_containers/pause-arm64:3.0"
+            ],
+            "sizeBytes": 541776
+          }
+        ]
+      }
+    },
+    {
+      "metadata": {
+        "name": "k8s-minion5",
+        "selfLink": "/api/v1/nodes/k8s-minion5",
+        "uid": "5b838537-0600-11e8-a855-8ed62561c844",
+        "resourceVersion": "1268045",
+        "creationTimestamp": "2018-01-30T20:58:43Z",
+        "labels": {
+          "beta.kubernetes.io/arch": "arm64",
+          "beta.kubernetes.io/os": "linux",
+          "kubernetes.io/hostname": "k8s-minion5"
+        },
+        "annotations": {
+          "flannel.alpha.coreos.com/backend-data": "null",
+          "flannel.alpha.coreos.com/backend-type": "",
+          "flannel.alpha.coreos.com/kube-subnet-manager": "true",
+          "flannel.alpha.coreos.com/public-ip": "192.168.0.164",
+          "node.alpha.kubernetes.io/ttl": "0",
+          "volumes.kubernetes.io/controller-managed-attach-detach": "true"
+        }
+      },
+      "spec": {
+        "podCIDR": "10.244.4.0/24",
+        "externalID": "k8s-minion5"
+      },
+      "status": {
+        "capacity": {
+          "cpu": "4",
+          "memory": "2036460Ki",
+          "pods": "110"
+        },
+        "allocatable": {
+          "cpu": "4",
+          "memory": "1934060Ki",
+          "pods": "110"
+        },
+        "conditions": [
+          {
+            "type": "OutOfDisk",
+            "status": "False",
+            "lastHeartbeatTime": "2018-02-28T10:07:35Z",
+            "lastTransitionTime": "2018-01-30T20:58:43Z",
+            "reason": "KubeletHasSufficientDisk",
+            "message": "kubelet has sufficient disk space available"
+          },
+          {
+            "type": "MemoryPressure",
+            "status": "False",
+            "lastHeartbeatTime": "2018-02-28T10:07:35Z",
+            "lastTransitionTime": "2018-02-10T20:34:40Z",
+            "reason": "KubeletHasSufficientMemory",
+            "message": "kubelet has sufficient memory available"
+          },
+          {
+            "type": "DiskPressure",
+            "status": "False",
+            "lastHeartbeatTime": "2018-02-28T10:07:35Z",
+            "lastTransitionTime": "2018-02-10T20:34:40Z",
+            "reason": "KubeletHasNoDiskPressure",
+            "message": "kubelet has no disk pressure"
+          },
+          {
+            "type": "Ready",
+            "status": "True",
+            "lastHeartbeatTime": "2018-02-28T10:07:35Z",
+            "lastTransitionTime": "2018-02-21T19:16:52Z",
+            "reason": "KubeletReady",
+            "message": "kubelet is posting ready status. AppArmor enabled"
+          }
+        ],
+        "addresses": [
+          {
+            "type": "InternalIP",
+            "address": "192.168.11.6"
+          },
+          {
+            "type": "Hostname",
+            "address": "k8s-minion5"
+          }
+        ],
+        "daemonEndpoints": {
+          "kubeletEndpoint": {
+            "Port": 10250
+          }
+        },
+        "nodeInfo": {
+          "machineID": "8a7eae2accb7977bad9de1e15856980a",
+          "systemUUID": "8a7eae2accb7977bad9de1e15856980a",
+          "bootID": "f2b106ac-d9bf-4a9c-91fb-a1e74bf6300b",
+          "kernelVersion": "3.10.104-2-pine64-longsleep",
+          "osImage": "Ubuntu 16.04.1 LTS",
+          "containerRuntimeVersion": "docker://1.13.1",
+          "kubeletVersion": "v1.9.2",
+          "kubeProxyVersion": "v1.9.2",
+          "operatingSystem": "linux",
+          "architecture": "arm64"
+        },
+        "images": [
+          {
+            "names": [
+              "gcr.io/google_containers/kube-proxy-arm64@sha256:a51c18ab411a6fc766b8bbff2dbab7fbb8a29a2af9b1a34fdacb04c5e4664a2d",
+              "gcr.io/google_containers/kube-proxy-arm64:v1.9.2"
+            ],
+            "sizeBytes": 112135582
+          },
+          {
+            "names": [
+              "rilleralle/k8s-graph-arm64@sha256:16e1d2e029fe2485636d31d17b21ff29f85f583e55e6a472528b680dcf2a216e",
+              "rilleralle/k8s-graph-arm64:latest"
+            ],
+            "sizeBytes": 83321466
+          },
+          {
+            "names": [
+              "rilleralle/k8s-graph-arm64@sha256:5fee704d6f99774876d8c4ed40b499257ec8323357b373c1e1e1bdc6e9457659"
+            ],
+            "sizeBytes": 83320265
+          },
+          {
+            "names": [
+              "rilleralle/k8s-test-microservice-arm64@sha256:2007e9399b499d7364f83f77421d7fc0ab910079669f1890963e338dcb6f6093",
+              "rilleralle/k8s-test-microservice-arm64:v1"
+            ],
+            "sizeBytes": 79080337
+          },
+          {
+            "names": [
+              "rilleralle/k8s-test-microservice-arm64@sha256:c5533763179d083eda7d6af3103fc469e7324c08109290dc646d20545825cbe6",
+              "rilleralle/k8s-test-microservice-arm64:v2"
+            ],
+            "sizeBytes": 79080290
+          },
+          {
+            "names": [
+              "rilleralle/k8s-test-microservice-arm64@sha256:aa7bb4a5b9745807d91f9c2a3523ef8de52637c7a1a2cc26c9c153f13c81cc92"
+            ],
+            "sizeBytes": 79077959
+          },
+          {
+            "names": [
+              "rilleralle/k8s-test-microservice-arm64@sha256:f68ac6107fca74e9f95291f71ce6a5626b635d533d6ff0e8f6a258ddfc66a640",
+              "rilleralle/k8s-test-microservice-arm64:latest"
+            ],
+            "sizeBytes": 79076703
+          },
+          {
+            "names": [
+              "rilleralle/k8s-test-microservice-arm64@sha256:52265b396f9d6063a2027f2b7f4cc4736264f7cb0f9f821acc007868a199faec"
+            ],
+            "sizeBytes": 79076556
+          },
+          {
+            "names": [
+              "rilleralle/k8s-test-microservice-arm64@sha256:38969ca3c9c546e785cd5d3d1c065d61f5f96aae62d485748651af383baa29d0"
+            ],
+            "sizeBytes": 79075234
+          },
+          {
+            "names": [
+              "rilleralle/kubectl-arm64@sha256:4680f5a054836b9964ee32efbe1418e6b152e5152ef637fa3b0474b96830239a",
+              "rilleralle/kubectl-arm64:latest"
+            ],
+            "sizeBytes": 68522196
+          },
+          {
+            "names": [
+              "quay.io/coreos/flannel@sha256:a5adf4dc63c660c8255e85cbc3c65adddce4f160b4c57bf57a47c41e21675aab",
+              "quay.io/coreos/flannel:v0.9.1-arm64"
+            ],
+            "sizeBytes": 38030232
+          },
+          {
+            "names": [
+              "gcr.io/google_containers/pause-arm64@sha256:bfc848340ea91ab2b373c706e267d072b0d8c1fdd0b3b7b64b01801f57090e9f",
+              "gcr.io/google_containers/pause-arm64:3.0"
+            ],
+            "sizeBytes": 541776
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,1348 @@
+{
+  "kind": "PodList",
+  "apiVersion": "v1",
+  "metadata": {
+    "selfLink": "/api/v1/namespaces/default/pods",
+    "resourceVersion": "1268087"
+  },
+  "items": [
+    {
+      "metadata": {
+        "name": "k8s-graph-79d9f5965d-5j7dv",
+        "generateName": "k8s-graph-79d9f5965d-",
+        "namespace": "default",
+        "selfLink": "/api/v1/namespaces/default/pods/k8s-graph-79d9f5965d-5j7dv",
+        "uid": "9df77ea9-1752-11e8-8691-463e972f18ce",
+        "resourceVersion": "1267562",
+        "creationTimestamp": "2018-02-21T22:00:23Z",
+        "deletionTimestamp": "2018-02-21T22:00:23Z",
+        "labels": {
+          "pod-template-hash": "3585915218",
+          "app": "k8s-graph"
+        },
+        "ownerReferences": [
+          {
+            "apiVersion": "extensions/v1beta1",
+            "kind": "ReplicaSet",
+            "name": "k8s-graph-79d9f5965d",
+            "uid": "9deab9b9-1752-11e8-8691-463e972f18ce",
+            "controller": true,
+            "blockOwnerDeletion": true
+          }
+        ]
+      },
+      "spec": {
+        "volumes": [
+          {
+            "name": "default-token-tq4kn",
+            "secret": {
+              "secretName": "default-token-tq4kn",
+              "defaultMode": 420
+            }
+          }
+        ],
+        "containers": [
+          {
+            "name": "k8s-graph",
+            "image": "rilleralle/k8s-graph-arm64:dev",
+            "ports": [
+              {
+                "containerPort": 3000,
+                "protocol": "TCP"
+              }
+            ],
+            "resources": {
+              
+            },
+            "volumeMounts": [
+              {
+                "name": "default-token-tq4kn",
+                "readOnly": true,
+                "mountPath": "/var/run/secrets/kubernetes.io/serviceaccount"
+              }
+            ],
+            "terminationMessagePath": "/dev/termination-log",
+            "terminationMessagePolicy": "File",
+            "imagePullPolicy": "Always"
+          },
+          {
+            "name": "kubectl",
+            "image": "rilleralle/kubectl-arm64",
+            "ports": [
+              {
+                "containerPort": 8001,
+                "protocol": "TCP"
+              }
+            ],
+            "resources": {
+              
+            },
+            "volumeMounts": [
+              {
+                "name": "default-token-tq4kn",
+                "readOnly": true,
+                "mountPath": "/var/run/secrets/kubernetes.io/serviceaccount"
+              }
+            ],
+            "terminationMessagePath": "/dev/termination-log",
+            "terminationMessagePolicy": "File",
+            "imagePullPolicy": "Always"
+          }
+        ],
+        "restartPolicy": "Always",
+        "terminationGracePeriodSeconds": 30,
+        "dnsPolicy": "ClusterFirst",
+        "serviceAccountName": "default",
+        "serviceAccount": "default",
+        "nodeName": "k8s-minion3",
+        "securityContext": {
+          
+        },
+        "schedulerName": "default-scheduler",
+        "tolerations": [
+          {
+            "key": "node.kubernetes.io/not-ready",
+            "operator": "Exists",
+            "effect": "NoExecute",
+            "tolerationSeconds": 300
+          },
+          {
+            "key": "node.kubernetes.io/unreachable",
+            "operator": "Exists",
+            "effect": "NoExecute",
+            "tolerationSeconds": 300
+          }
+        ]
+      },
+      "status": {
+        "phase": "Running",
+        "conditions": [
+          {
+            "type": "Initialized",
+            "status": "True",
+            "lastProbeTime": null,
+            "lastTransitionTime": "2018-02-21T22:00:24Z"
+          },
+          {
+            "type": "Ready",
+            "status": "True",
+            "lastProbeTime": null,
+            "lastTransitionTime": "2018-02-28T09:38:08Z"
+          },
+          {
+            "type": "PodScheduled",
+            "status": "True",
+            "lastProbeTime": null,
+            "lastTransitionTime": "2018-02-21T22:00:24Z"
+          }
+        ],
+        "hostIP": "192.168.11.4",
+        "podIP": "10.244.1.182",
+        "startTime": "2018-02-21T22:00:24Z",
+        "containerStatuses": [
+          {
+            "name": "k8s-graph",
+            "state": {
+              "running": {
+                "startedAt": "2018-02-28T09:38:05Z"
+              }
+            },
+            "lastState": {
+              "terminated": {
+                "exitCode": 255,
+                "reason": "Error",
+                "startedAt": "2018-02-21T22:00:52Z",
+                "finishedAt": "2018-02-21T21:49:23Z",
+                "containerID": "docker://432736dbcd14394511581a4373a5f87e85b9804c4a807f0b6243aa459715192c"
+              }
+            },
+            "ready": true,
+            "restartCount": 1,
+            "image": "rilleralle/k8s-graph-arm64:dev",
+            "imageID": "docker-pullable://rilleralle/k8s-graph-arm64@sha256:57c3b23b6f579b32a923baa43cc7ca2a1f40180349d66ab4ff9a622b8de0efac",
+            "containerID": "docker://6fa2b22762b5851510320688fda7550a696f4dbe91296f20a485e82e03c3f257"
+          },
+          {
+            "name": "kubectl",
+            "state": {
+              "running": {
+                "startedAt": "2018-02-28T09:38:08Z"
+              }
+            },
+            "lastState": {
+              "terminated": {
+                "exitCode": 255,
+                "reason": "Error",
+                "startedAt": "2018-02-21T22:00:54Z",
+                "finishedAt": "2018-02-21T21:49:23Z",
+                "containerID": "docker://4d749aa033b8664c7fe8adb2f734e65e7c1902634dbb6e4e965bffa64fcb7b40"
+              }
+            },
+            "ready": true,
+            "restartCount": 1,
+            "image": "rilleralle/kubectl-arm64:latest",
+            "imageID": "docker-pullable://rilleralle/kubectl-arm64@sha256:4680f5a054836b9964ee32efbe1418e6b152e5152ef637fa3b0474b96830239a",
+            "containerID": "docker://1755335b74d47757f9f02f976884d34c1ba2dfa781844d5a8ce538ce161ab143"
+          }
+        ],
+        "qosClass": "BestEffort"
+      }
+    },
+    {
+      "metadata": {
+        "name": "k8s-graph-79d9f5965d-5j7dv",
+        "generateName": "k8s-graph-79d9f5965d-",
+        "namespace": "default",
+        "selfLink": "/api/v1/namespaces/default/pods/k8s-graph-79d9f5965d-5j7dv",
+        "uid": "9df77ea9-1752-11e8-8691-463e972f18ce",
+        "resourceVersion": "1267562",
+        "creationTimestamp": "2018-02-21T22:00:23Z",
+        "labels": {
+          "pod-template-hash": "3585915218",
+          "app": "k8s-graph"
+        },
+        "ownerReferences": [
+          {
+            "apiVersion": "extensions/v1beta1",
+            "kind": "ReplicaSet",
+            "name": "k8s-graph-79d9f5965d",
+            "uid": "9deab9b9-1752-11e8-8691-463e972f18ce",
+            "controller": true,
+            "blockOwnerDeletion": true
+          }
+        ]
+      },
+      "spec": {
+        "volumes": [
+          {
+            "name": "default-token-tq4kn",
+            "secret": {
+              "secretName": "default-token-tq4kn",
+              "defaultMode": 420
+            }
+          }
+        ],
+        "containers": [
+          {
+            "name": "k8s-graph",
+            "image": "rilleralle/k8s-graph-arm64:dev",
+            "ports": [
+              {
+                "containerPort": 3000,
+                "protocol": "TCP"
+              }
+            ],
+            "resources": {
+
+            },
+            "volumeMounts": [
+              {
+                "name": "default-token-tq4kn",
+                "readOnly": true,
+                "mountPath": "/var/run/secrets/kubernetes.io/serviceaccount"
+              }
+            ],
+            "terminationMessagePath": "/dev/termination-log",
+            "terminationMessagePolicy": "File",
+            "imagePullPolicy": "Always"
+          },
+          {
+            "name": "kubectl",
+            "image": "rilleralle/kubectl-arm64",
+            "ports": [
+              {
+                "containerPort": 8001,
+                "protocol": "TCP"
+              }
+            ],
+            "resources": {
+
+            },
+            "volumeMounts": [
+              {
+                "name": "default-token-tq4kn",
+                "readOnly": true,
+                "mountPath": "/var/run/secrets/kubernetes.io/serviceaccount"
+              }
+            ],
+            "terminationMessagePath": "/dev/termination-log",
+            "terminationMessagePolicy": "File",
+            "imagePullPolicy": "Always"
+          }
+        ],
+        "restartPolicy": "Always",
+        "terminationGracePeriodSeconds": 30,
+        "dnsPolicy": "ClusterFirst",
+        "serviceAccountName": "default",
+        "serviceAccount": "default",
+        "nodeName": "k8s-minion3",
+        "securityContext": {
+
+        },
+        "schedulerName": "default-scheduler",
+        "tolerations": [
+          {
+            "key": "node.kubernetes.io/not-ready",
+            "operator": "Exists",
+            "effect": "NoExecute",
+            "tolerationSeconds": 300
+          },
+          {
+            "key": "node.kubernetes.io/unreachable",
+            "operator": "Exists",
+            "effect": "NoExecute",
+            "tolerationSeconds": 300
+          }
+        ]
+      },
+      "status": {
+        "phase": "Running",
+        "conditions": [
+          {
+            "type": "Initialized",
+            "status": "True",
+            "lastProbeTime": null,
+            "lastTransitionTime": "2018-02-21T22:00:24Z"
+          },
+          {
+            "type": "Ready",
+            "status": "True",
+            "lastProbeTime": null,
+            "lastTransitionTime": "2018-02-28T09:38:08Z"
+          },
+          {
+            "type": "PodScheduled",
+            "status": "True",
+            "lastProbeTime": null,
+            "lastTransitionTime": "2018-02-21T22:00:24Z"
+          }
+        ],
+        "hostIP": "192.168.11.4",
+        "podIP": "10.244.1.182",
+        "startTime": "2018-02-21T22:00:24Z",
+        "containerStatuses": [
+          {
+            "name": "k8s-graph",
+            "state": {
+              "running": {
+                "startedAt": "2018-02-28T09:38:05Z"
+              }
+            },
+            "lastState": {
+              "terminated": {
+                "exitCode": 255,
+                "reason": "Error",
+                "startedAt": "2018-02-21T22:00:52Z",
+                "finishedAt": "2018-02-21T21:49:23Z",
+                "containerID": "docker://432736dbcd14394511581a4373a5f87e85b9804c4a807f0b6243aa459715192c"
+              }
+            },
+            "ready": true,
+            "restartCount": 1,
+            "image": "rilleralle/k8s-graph-arm64:dev",
+            "imageID": "docker-pullable://rilleralle/k8s-graph-arm64@sha256:57c3b23b6f579b32a923baa43cc7ca2a1f40180349d66ab4ff9a622b8de0efac",
+            "containerID": "docker://6fa2b22762b5851510320688fda7550a696f4dbe91296f20a485e82e03c3f257"
+          },
+          {
+            "name": "kubectl",
+            "state": {
+              "running": {
+                "startedAt": "2018-02-28T09:38:08Z"
+              }
+            },
+            "lastState": {
+              "terminated": {
+                "exitCode": 255,
+                "reason": "Error",
+                "startedAt": "2018-02-21T22:00:54Z",
+                "finishedAt": "2018-02-21T21:49:23Z",
+                "containerID": "docker://4d749aa033b8664c7fe8adb2f734e65e7c1902634dbb6e4e965bffa64fcb7b40"
+              }
+            },
+            "ready": true,
+            "restartCount": 1,
+            "image": "rilleralle/kubectl-arm64:latest",
+            "imageID": "docker-pullable://rilleralle/kubectl-arm64@sha256:4680f5a054836b9964ee32efbe1418e6b152e5152ef637fa3b0474b96830239a",
+            "containerID": "docker://1755335b74d47757f9f02f976884d34c1ba2dfa781844d5a8ce538ce161ab143"
+          }
+        ],
+        "qosClass": "BestEffort"
+      }
+    },
+    {
+      "metadata": {
+        "name": "k8s-graph-79d9f5965d-5j7dv",
+        "generateName": "k8s-graph-79d9f5965d-",
+        "namespace": "default",
+        "selfLink": "/api/v1/namespaces/default/pods/k8s-graph-79d9f5965d-5j7dv",
+        "uid": "9df77ea9-1752-11e8-8691-463e972f18ce",
+        "resourceVersion": "1267562",
+        "creationTimestamp": "2018-02-21T22:00:23Z",
+        "labels": {
+          "pod-template-hash": "3585915218",
+          "app": "k8s-graph"
+        },
+        "ownerReferences": [
+          {
+            "apiVersion": "extensions/v1beta1",
+            "kind": "ReplicaSet",
+            "name": "k8s-graph-79d9f5965d",
+            "uid": "9deab9b9-1752-11e8-8691-463e972f18ce",
+            "controller": true,
+            "blockOwnerDeletion": true
+          }
+        ]
+      },
+      "spec": {
+        "volumes": [
+          {
+            "name": "default-token-tq4kn",
+            "secret": {
+              "secretName": "default-token-tq4kn",
+              "defaultMode": 420
+            }
+          }
+        ],
+        "containers": [
+          {
+            "name": "k8s-graph",
+            "image": "rilleralle/k8s-graph-arm64:dev",
+            "ports": [
+              {
+                "containerPort": 3000,
+                "protocol": "TCP"
+              }
+            ],
+            "resources": {
+
+            },
+            "volumeMounts": [
+              {
+                "name": "default-token-tq4kn",
+                "readOnly": true,
+                "mountPath": "/var/run/secrets/kubernetes.io/serviceaccount"
+              }
+            ],
+            "terminationMessagePath": "/dev/termination-log",
+            "terminationMessagePolicy": "File",
+            "imagePullPolicy": "Always"
+          },
+          {
+            "name": "kubectl",
+            "image": "rilleralle/kubectl-arm64",
+            "ports": [
+              {
+                "containerPort": 8001,
+                "protocol": "TCP"
+              }
+            ],
+            "resources": {
+
+            },
+            "volumeMounts": [
+              {
+                "name": "default-token-tq4kn",
+                "readOnly": true,
+                "mountPath": "/var/run/secrets/kubernetes.io/serviceaccount"
+              }
+            ],
+            "terminationMessagePath": "/dev/termination-log",
+            "terminationMessagePolicy": "File",
+            "imagePullPolicy": "Always"
+          }
+        ],
+        "restartPolicy": "Always",
+        "terminationGracePeriodSeconds": 30,
+        "dnsPolicy": "ClusterFirst",
+        "serviceAccountName": "default",
+        "serviceAccount": "default",
+        "nodeName": "k8s-minion3",
+        "securityContext": {
+
+        },
+        "schedulerName": "default-scheduler",
+        "tolerations": [
+          {
+            "key": "node.kubernetes.io/not-ready",
+            "operator": "Exists",
+            "effect": "NoExecute",
+            "tolerationSeconds": 300
+          },
+          {
+            "key": "node.kubernetes.io/unreachable",
+            "operator": "Exists",
+            "effect": "NoExecute",
+            "tolerationSeconds": 300
+          }
+        ]
+      },
+      "status": {
+        "phase": "Pending",
+        "conditions": [
+          {
+            "type": "Initialized",
+            "status": "True",
+            "lastProbeTime": null,
+            "lastTransitionTime": "2018-02-21T22:00:24Z"
+          },
+          {
+            "type": "Ready",
+            "status": "True",
+            "lastProbeTime": null,
+            "lastTransitionTime": "2018-02-28T09:38:08Z"
+          },
+          {
+            "type": "PodScheduled",
+            "status": "True",
+            "lastProbeTime": null,
+            "lastTransitionTime": "2018-02-21T22:00:24Z"
+          }
+        ],
+        "hostIP": "192.168.11.4",
+        "podIP": "10.244.1.182",
+        "startTime": "2018-02-21T22:00:24Z",
+        "containerStatuses": [
+          {
+            "name": "k8s-graph",
+            "state": {
+              "running": {
+                "startedAt": "2018-02-28T09:38:05Z"
+              }
+            },
+            "lastState": {
+              "terminated": {
+                "exitCode": 255,
+                "reason": "Error",
+                "startedAt": "2018-02-21T22:00:52Z",
+                "finishedAt": "2018-02-21T21:49:23Z",
+                "containerID": "docker://432736dbcd14394511581a4373a5f87e85b9804c4a807f0b6243aa459715192c"
+              }
+            },
+            "ready": true,
+            "restartCount": 1,
+            "image": "rilleralle/k8s-graph-arm64:dev",
+            "imageID": "docker-pullable://rilleralle/k8s-graph-arm64@sha256:57c3b23b6f579b32a923baa43cc7ca2a1f40180349d66ab4ff9a622b8de0efac",
+            "containerID": "docker://6fa2b22762b5851510320688fda7550a696f4dbe91296f20a485e82e03c3f257"
+          },
+          {
+            "name": "kubectl",
+            "state": {
+              "running": {
+                "startedAt": "2018-02-28T09:38:08Z"
+              }
+            },
+            "lastState": {
+              "terminated": {
+                "exitCode": 255,
+                "reason": "Error",
+                "startedAt": "2018-02-21T22:00:54Z",
+                "finishedAt": "2018-02-21T21:49:23Z",
+                "containerID": "docker://4d749aa033b8664c7fe8adb2f734e65e7c1902634dbb6e4e965bffa64fcb7b40"
+              }
+            },
+            "ready": true,
+            "restartCount": 1,
+            "image": "rilleralle/kubectl-arm64:latest",
+            "imageID": "docker-pullable://rilleralle/kubectl-arm64@sha256:4680f5a054836b9964ee32efbe1418e6b152e5152ef637fa3b0474b96830239a",
+            "containerID": "docker://1755335b74d47757f9f02f976884d34c1ba2dfa781844d5a8ce538ce161ab143"
+          }
+        ],
+        "qosClass": "BestEffort"
+      }
+    },
+    {
+      "metadata": {
+        "name": "k8s-test-microservice-64645c99f8-5xzlj",
+        "generateName": "k8s-test-microservice-64645c99f8-",
+        "namespace": "default",
+        "selfLink": "/api/v1/namespaces/default/pods/k8s-test-microservice-64645c99f8-5xzlj",
+        "uid": "47574025-1753-11e8-8691-463e972f18ce",
+        "resourceVersion": "1265624",
+        "creationTimestamp": "2018-02-21T22:05:08Z",
+        "labels": {
+          "app": "k8s-test-microservice",
+          "pod-template-hash": "2020175594"
+        },
+        "ownerReferences": [
+          {
+            "apiVersion": "extensions/v1beta1",
+            "kind": "ReplicaSet",
+            "name": "k8s-test-microservice-64645c99f8",
+            "uid": "e82d4e51-1752-11e8-8691-463e972f18ce",
+            "controller": true,
+            "blockOwnerDeletion": true
+          }
+        ]
+      },
+      "spec": {
+        "volumes": [
+          {
+            "name": "default-token-tq4kn",
+            "secret": {
+              "secretName": "default-token-tq4kn",
+              "defaultMode": 420
+            }
+          }
+        ],
+        "containers": [
+          {
+            "name": "k8s-test-microservice-container",
+            "image": "rilleralle/k8s-test-microservice-arm64:v1",
+            "ports": [
+              {
+                "containerPort": 3000,
+                "protocol": "TCP"
+              }
+            ],
+            "resources": {
+              
+            },
+            "volumeMounts": [
+              {
+                "name": "default-token-tq4kn",
+                "readOnly": true,
+                "mountPath": "/var/run/secrets/kubernetes.io/serviceaccount"
+              }
+            ],
+            "livenessProbe": {
+              "httpGet": {
+                "path": "/liveness",
+                "port": 3000,
+                "scheme": "HTTP"
+              },
+              "initialDelaySeconds": 2,
+              "timeoutSeconds": 1,
+              "periodSeconds": 2,
+              "successThreshold": 1,
+              "failureThreshold": 1
+            },
+            "readinessProbe": {
+              "httpGet": {
+                "path": "/readiness",
+                "port": 3000,
+                "scheme": "HTTP"
+              },
+              "initialDelaySeconds": 2,
+              "timeoutSeconds": 1,
+              "periodSeconds": 2,
+              "successThreshold": 1,
+              "failureThreshold": 1
+            },
+            "terminationMessagePath": "/dev/termination-log",
+            "terminationMessagePolicy": "File",
+            "imagePullPolicy": "IfNotPresent"
+          }
+        ],
+        "restartPolicy": "Always",
+        "terminationGracePeriodSeconds": 30,
+        "dnsPolicy": "ClusterFirst",
+        "serviceAccountName": "default",
+        "serviceAccount": "default",
+        "nodeName": "k8s-minion1",
+        "securityContext": {
+          
+        },
+        "schedulerName": "default-scheduler",
+        "tolerations": [
+          {
+            "key": "node.kubernetes.io/not-ready",
+            "operator": "Exists",
+            "effect": "NoExecute",
+            "tolerationSeconds": 300
+          },
+          {
+            "key": "node.kubernetes.io/unreachable",
+            "operator": "Exists",
+            "effect": "NoExecute",
+            "tolerationSeconds": 300
+          }
+        ]
+      },
+      "status": {
+        "phase": "Running",
+        "conditions": [
+          {
+            "type": "Initialized",
+            "status": "True",
+            "lastProbeTime": null,
+            "lastTransitionTime": "2018-02-21T22:05:08Z"
+          },
+          {
+            "type": "Ready",
+            "status": "False",
+            "lastProbeTime": null,
+            "lastTransitionTime": "2018-02-28T09:38:34Z"
+          },
+          {
+            "type": "PodScheduled",
+            "status": "True",
+            "lastProbeTime": null,
+            "lastTransitionTime": "2018-02-21T22:05:08Z"
+          }
+        ],
+        "hostIP": "192.168.11.2",
+        "podIP": "10.244.2.100",
+        "startTime": "2018-02-21T22:05:08Z",
+        "containerStatuses": [
+          {
+            "name": "k8s-test-microservice-container",
+            "state": {
+              "running": {
+                "startedAt": "2018-02-28T09:38:31Z"
+              }
+            },
+            "lastState": {
+              "terminated": {
+                "exitCode": 137,
+                "reason": "Error",
+                "startedAt": "2018-02-28T09:37:57Z",
+                "finishedAt": "2018-02-28T09:38:30Z",
+                "containerID": "docker://3efcba972500af33a2532558465deb6cedd51e0da2ca1e11be995e6f01b2c70c"
+              }
+            },
+            "ready": true,
+            "restartCount": 2,
+            "image": "rilleralle/k8s-test-microservice-arm64:v1",
+            "imageID": "docker-pullable://rilleralle/k8s-test-microservice-arm64@sha256:2007e9399b499d7364f83f77421d7fc0ab910079669f1890963e338dcb6f6093",
+            "containerID": "docker://6a9b9de6c910c521e816cb69e1a66c475f0f19abc09f9c4bfc842410591d6e5f"
+          }
+        ],
+        "qosClass": "BestEffort"
+      }
+    },
+    {
+      "metadata": {
+        "name": "k8s-test-microservice-64645c99f8-hr48t",
+        "generateName": "k8s-test-microservice-64645c99f8-",
+        "namespace": "default",
+        "selfLink": "/api/v1/namespaces/default/pods/k8s-test-microservice-64645c99f8-hr48t",
+        "uid": "4a4117f1-1753-11e8-8691-463e972f18ce",
+        "resourceVersion": "1267626",
+        "creationTimestamp": "2018-02-21T22:05:13Z",
+        "labels": {
+          "app": "k8s-test-microservice",
+          "pod-template-hash": "2020175594"
+        },
+        "ownerReferences": [
+          {
+            "apiVersion": "extensions/v1beta1",
+            "kind": "ReplicaSet",
+            "name": "k8s-test-microservice-64645c99f8",
+            "uid": "e82d4e51-1752-11e8-8691-463e972f18ce",
+            "controller": true,
+            "blockOwnerDeletion": true
+          }
+        ]
+      },
+      "spec": {
+        "volumes": [
+          {
+            "name": "default-token-tq4kn",
+            "secret": {
+              "secretName": "default-token-tq4kn",
+              "defaultMode": 420
+            }
+          }
+        ],
+        "containers": [
+          {
+            "name": "k8s-test-microservice-container",
+            "image": "rilleralle/k8s-test-microservice-arm64:v1",
+            "ports": [
+              {
+                "containerPort": 3000,
+                "protocol": "TCP"
+              }
+            ],
+            "resources": {
+              
+            },
+            "volumeMounts": [
+              {
+                "name": "default-token-tq4kn",
+                "readOnly": true,
+                "mountPath": "/var/run/secrets/kubernetes.io/serviceaccount"
+              }
+            ],
+            "livenessProbe": {
+              "httpGet": {
+                "path": "/liveness",
+                "port": 3000,
+                "scheme": "HTTP"
+              },
+              "initialDelaySeconds": 2,
+              "timeoutSeconds": 1,
+              "periodSeconds": 2,
+              "successThreshold": 1,
+              "failureThreshold": 1
+            },
+            "readinessProbe": {
+              "httpGet": {
+                "path": "/readiness",
+                "port": 3000,
+                "scheme": "HTTP"
+              },
+              "initialDelaySeconds": 2,
+              "timeoutSeconds": 1,
+              "periodSeconds": 2,
+              "successThreshold": 1,
+              "failureThreshold": 1
+            },
+            "terminationMessagePath": "/dev/termination-log",
+            "terminationMessagePolicy": "File",
+            "imagePullPolicy": "IfNotPresent"
+          }
+        ],
+        "restartPolicy": "Always",
+        "terminationGracePeriodSeconds": 30,
+        "dnsPolicy": "ClusterFirst",
+        "serviceAccountName": "default",
+        "serviceAccount": "default",
+        "nodeName": "k8s-minion5",
+        "securityContext": {
+          
+        },
+        "schedulerName": "default-scheduler",
+        "tolerations": [
+          {
+            "key": "node.kubernetes.io/not-ready",
+            "operator": "Exists",
+            "effect": "NoExecute",
+            "tolerationSeconds": 300
+          },
+          {
+            "key": "node.kubernetes.io/unreachable",
+            "operator": "Exists",
+            "effect": "NoExecute",
+            "tolerationSeconds": 300
+          }
+        ]
+      },
+      "status": {
+        "phase": "Running",
+        "conditions": [
+          {
+            "type": "Initialized",
+            "status": "True",
+            "lastProbeTime": null,
+            "lastTransitionTime": "2018-02-21T22:05:13Z"
+          },
+          {
+            "type": "Ready",
+            "status": "True",
+            "lastProbeTime": null,
+            "lastTransitionTime": "2018-02-28T09:38:35Z"
+          },
+          {
+            "type": "PodScheduled",
+            "status": "True",
+            "lastProbeTime": null,
+            "lastTransitionTime": "2018-02-21T22:05:13Z"
+          }
+        ],
+        "hostIP": "192.168.11.6",
+        "podIP": "10.244.4.100",
+        "startTime": "2018-02-21T22:05:13Z",
+        "containerStatuses": [
+          {
+            "name": "k8s-test-microservice-container",
+            "state": {
+              "running": {
+                "startedAt": "2018-02-28T09:38:33Z"
+              }
+            },
+            "lastState": {
+              "terminated": {
+                "exitCode": 137,
+                "reason": "Error",
+                "startedAt": "2018-02-28T09:37:59Z",
+                "finishedAt": "2018-02-28T09:38:32Z",
+                "containerID": "docker://40339bd408672018a101db28d38cd71ab993a8d35e312e09934f56f951693c0d"
+              }
+            },
+            "ready": true,
+            "restartCount": 2,
+            "image": "rilleralle/k8s-test-microservice-arm64:v1",
+            "imageID": "docker-pullable://rilleralle/k8s-test-microservice-arm64@sha256:2007e9399b499d7364f83f77421d7fc0ab910079669f1890963e338dcb6f6093",
+            "containerID": "docker://3b5aab5ecd77e10568fd09c527356c2db8d4ec677713dc57574ba2e6579b6937"
+          }
+        ],
+        "qosClass": "BestEffort"
+      }
+    },
+    {
+      "metadata": {
+        "name": "k8s-test-microservice-64645c99f8-j8cjb",
+        "generateName": "k8s-test-microservice-64645c99f8-",
+        "namespace": "default",
+        "selfLink": "/api/v1/namespaces/default/pods/k8s-test-microservice-64645c99f8-j8cjb",
+        "uid": "c7411b88-1c6b-11e8-95d6-9a91b62ab5ab",
+        "resourceVersion": "1266070",
+        "creationTimestamp": "2018-02-28T09:43:06Z",
+        "labels": {
+          "app": "k8s-test-microservice",
+          "pod-template-hash": "2020175594"
+        },
+        "ownerReferences": [
+          {
+            "apiVersion": "extensions/v1beta1",
+            "kind": "ReplicaSet",
+            "name": "k8s-test-microservice-64645c99f8",
+            "uid": "e82d4e51-1752-11e8-8691-463e972f18ce",
+            "controller": true,
+            "blockOwnerDeletion": true
+          }
+        ]
+      },
+      "spec": {
+        "volumes": [
+          {
+            "name": "default-token-tq4kn",
+            "secret": {
+              "secretName": "default-token-tq4kn",
+              "defaultMode": 420
+            }
+          }
+        ],
+        "containers": [
+          {
+            "name": "k8s-test-microservice-container",
+            "image": "rilleralle/k8s-test-microservice-arm64:v1",
+            "ports": [
+              {
+                "containerPort": 3000,
+                "protocol": "TCP"
+              }
+            ],
+            "resources": {
+              
+            },
+            "volumeMounts": [
+              {
+                "name": "default-token-tq4kn",
+                "readOnly": true,
+                "mountPath": "/var/run/secrets/kubernetes.io/serviceaccount"
+              }
+            ],
+            "livenessProbe": {
+              "httpGet": {
+                "path": "/liveness",
+                "port": 3000,
+                "scheme": "HTTP"
+              },
+              "initialDelaySeconds": 2,
+              "timeoutSeconds": 1,
+              "periodSeconds": 2,
+              "successThreshold": 1,
+              "failureThreshold": 1
+            },
+            "readinessProbe": {
+              "httpGet": {
+                "path": "/readiness",
+                "port": 3000,
+                "scheme": "HTTP"
+              },
+              "initialDelaySeconds": 2,
+              "timeoutSeconds": 1,
+              "periodSeconds": 2,
+              "successThreshold": 1,
+              "failureThreshold": 1
+            },
+            "terminationMessagePath": "/dev/termination-log",
+            "terminationMessagePolicy": "File",
+            "imagePullPolicy": "IfNotPresent"
+          }
+        ],
+        "restartPolicy": "Always",
+        "terminationGracePeriodSeconds": 30,
+        "dnsPolicy": "ClusterFirst",
+        "serviceAccountName": "default",
+        "serviceAccount": "default",
+        "nodeName": "k8s-minion1",
+        "securityContext": {
+          
+        },
+        "schedulerName": "default-scheduler",
+        "tolerations": [
+          {
+            "key": "node.kubernetes.io/not-ready",
+            "operator": "Exists",
+            "effect": "NoExecute",
+            "tolerationSeconds": 300
+          },
+          {
+            "key": "node.kubernetes.io/unreachable",
+            "operator": "Exists",
+            "effect": "NoExecute",
+            "tolerationSeconds": 300
+          }
+        ]
+      },
+      "status": {
+        "phase": "Running",
+        "conditions": [
+          {
+            "type": "Initialized",
+            "status": "True",
+            "lastProbeTime": null,
+            "lastTransitionTime": "2018-02-28T09:43:06Z"
+          },
+          {
+            "type": "Ready",
+            "status": "True",
+            "lastProbeTime": null,
+            "lastTransitionTime": "2018-02-28T09:43:10Z"
+          },
+          {
+            "type": "PodScheduled",
+            "status": "True",
+            "lastProbeTime": null,
+            "lastTransitionTime": "2018-02-28T09:43:06Z"
+          }
+        ],
+        "hostIP": "192.168.11.2",
+        "podIP": "10.244.2.101",
+        "startTime": "2018-02-28T09:43:06Z",
+        "containerStatuses": [
+          {
+            "name": "k8s-test-microservice-container",
+            "state": {
+              "running": {
+                "startedAt": "2018-02-28T09:43:08Z"
+              }
+            },
+            "lastState": {
+              
+            },
+            "ready": true,
+            "restartCount": 0,
+            "image": "rilleralle/k8s-test-microservice-arm64:v1",
+            "imageID": "docker-pullable://rilleralle/k8s-test-microservice-arm64@sha256:2007e9399b499d7364f83f77421d7fc0ab910079669f1890963e338dcb6f6093",
+            "containerID": "docker://63ddc2700cce532c9800d7c633951252240c16e49c66085cac26d419a5f69e03"
+          }
+        ],
+        "qosClass": "BestEffort"
+      }
+    },
+    {
+      "metadata": {
+        "name": "k8s-test-microservice-64645c99f8-ztvc9",
+        "generateName": "k8s-test-microservice-64645c99f8-",
+        "namespace": "default",
+        "selfLink": "/api/v1/namespaces/default/pods/k8s-test-microservice-64645c99f8-ztvc9",
+        "uid": "47762ad8-1753-11e8-8691-463e972f18ce",
+        "resourceVersion": "1267584",
+        "creationTimestamp": "2018-02-21T22:05:08Z",
+        "labels": {
+          "app": "k8s-test-microservice",
+          "pod-template-hash": "2020175594"
+        },
+        "ownerReferences": [
+          {
+            "apiVersion": "extensions/v1beta1",
+            "kind": "ReplicaSet",
+            "name": "k8s-test-microservice-64645c99f8",
+            "uid": "e82d4e51-1752-11e8-8691-463e972f18ce",
+            "controller": true,
+            "blockOwnerDeletion": true
+          }
+        ]
+      },
+      "spec": {
+        "volumes": [
+          {
+            "name": "default-token-tq4kn",
+            "secret": {
+              "secretName": "default-token-tq4kn",
+              "defaultMode": 420
+            }
+          }
+        ],
+        "containers": [
+          {
+            "name": "k8s-test-microservice-container",
+            "image": "rilleralle/k8s-test-microservice-arm64:v1",
+            "ports": [
+              {
+                "containerPort": 3000,
+                "protocol": "TCP"
+              }
+            ],
+            "resources": {
+              
+            },
+            "volumeMounts": [
+              {
+                "name": "default-token-tq4kn",
+                "readOnly": true,
+                "mountPath": "/var/run/secrets/kubernetes.io/serviceaccount"
+              }
+            ],
+            "livenessProbe": {
+              "httpGet": {
+                "path": "/liveness",
+                "port": 3000,
+                "scheme": "HTTP"
+              },
+              "initialDelaySeconds": 2,
+              "timeoutSeconds": 1,
+              "periodSeconds": 2,
+              "successThreshold": 1,
+              "failureThreshold": 1
+            },
+            "readinessProbe": {
+              "httpGet": {
+                "path": "/readiness",
+                "port": 3000,
+                "scheme": "HTTP"
+              },
+              "initialDelaySeconds": 2,
+              "timeoutSeconds": 1,
+              "periodSeconds": 2,
+              "successThreshold": 1,
+              "failureThreshold": 1
+            },
+            "terminationMessagePath": "/dev/termination-log",
+            "terminationMessagePolicy": "File",
+            "imagePullPolicy": "IfNotPresent"
+          }
+        ],
+        "restartPolicy": "Always",
+        "terminationGracePeriodSeconds": 30,
+        "dnsPolicy": "ClusterFirst",
+        "serviceAccountName": "default",
+        "serviceAccount": "default",
+        "nodeName": "k8s-minion3",
+        "securityContext": {
+          
+        },
+        "schedulerName": "default-scheduler",
+        "tolerations": [
+          {
+            "key": "node.kubernetes.io/not-ready",
+            "operator": "Exists",
+            "effect": "NoExecute",
+            "tolerationSeconds": 300
+          },
+          {
+            "key": "node.kubernetes.io/unreachable",
+            "operator": "Exists",
+            "effect": "NoExecute",
+            "tolerationSeconds": 300
+          }
+        ]
+      },
+      "status": {
+        "phase": "Running",
+        "conditions": [
+          {
+            "type": "Initialized",
+            "status": "True",
+            "lastProbeTime": null,
+            "lastTransitionTime": "2018-02-21T22:05:08Z"
+          },
+          {
+            "type": "Ready",
+            "status": "True",
+            "lastProbeTime": null,
+            "lastTransitionTime": "2018-02-28T09:38:37Z"
+          },
+          {
+            "type": "PodScheduled",
+            "status": "True",
+            "lastProbeTime": null,
+            "lastTransitionTime": "2018-02-21T22:05:08Z"
+          }
+        ],
+        "hostIP": "192.168.11.4",
+        "podIP": "10.244.1.181",
+        "startTime": "2018-02-21T22:05:08Z",
+        "containerStatuses": [
+          {
+            "name": "k8s-test-microservice-container",
+            "state": {
+              "running": {
+                "startedAt": "2018-02-28T09:38:35Z"
+              }
+            },
+            "lastState": {
+              "terminated": {
+                "exitCode": 137,
+                "reason": "Error",
+                "startedAt": "2018-02-28T09:38:01Z",
+                "finishedAt": "2018-02-28T09:38:33Z",
+                "containerID": "docker://55b69fa010888b128b9fbc63221f1709a55b805cac8f7b5cb7015e1322f16559"
+              }
+            },
+            "ready": true,
+            "restartCount": 2,
+            "image": "rilleralle/k8s-test-microservice-arm64:v1",
+            "imageID": "docker-pullable://rilleralle/k8s-test-microservice-arm64@sha256:2007e9399b499d7364f83f77421d7fc0ab910079669f1890963e338dcb6f6093",
+            "containerID": "docker://c570f0d48f0b5565cc2d046d88e29b615654f5386f184b709bf4b2c41a35d335"
+          }
+        ],
+        "qosClass": "BestEffort"
+      }
+    },
+    {
+      "metadata": {
+        "name": "k8s-test-microservice-64645c99f8-zvj56",
+        "generateName": "k8s-test-microservice-64645c99f8-",
+        "namespace": "default",
+        "selfLink": "/api/v1/namespaces/default/pods/k8s-test-microservice-64645c99f8-zvj56",
+        "uid": "4aa3e47b-1753-11e8-8691-463e972f18ce",
+        "resourceVersion": "1267605",
+        "creationTimestamp": "2018-02-21T22:05:13Z",
+        "labels": {
+          "pod-template-hash": "2020175594",
+          "app": "k8s-test-microservice"
+        },
+        "ownerReferences": [
+          {
+            "apiVersion": "extensions/v1beta1",
+            "kind": "ReplicaSet",
+            "name": "k8s-test-microservice-64645c99f8",
+            "uid": "e82d4e51-1752-11e8-8691-463e972f18ce",
+            "controller": true,
+            "blockOwnerDeletion": true
+          }
+        ]
+      },
+      "spec": {
+        "volumes": [
+          {
+            "name": "default-token-tq4kn",
+            "secret": {
+              "secretName": "default-token-tq4kn",
+              "defaultMode": 420
+            }
+          }
+        ],
+        "containers": [
+          {
+            "name": "k8s-test-microservice-container",
+            "image": "rilleralle/k8s-test-microservice-arm64:v1",
+            "ports": [
+              {
+                "containerPort": 3000,
+                "protocol": "TCP"
+              }
+            ],
+            "resources": {
+              
+            },
+            "volumeMounts": [
+              {
+                "name": "default-token-tq4kn",
+                "readOnly": true,
+                "mountPath": "/var/run/secrets/kubernetes.io/serviceaccount"
+              }
+            ],
+            "livenessProbe": {
+              "httpGet": {
+                "path": "/liveness",
+                "port": 3000,
+                "scheme": "HTTP"
+              },
+              "initialDelaySeconds": 2,
+              "timeoutSeconds": 1,
+              "periodSeconds": 2,
+              "successThreshold": 1,
+              "failureThreshold": 1
+            },
+            "readinessProbe": {
+              "httpGet": {
+                "path": "/readiness",
+                "port": 3000,
+                "scheme": "HTTP"
+              },
+              "initialDelaySeconds": 2,
+              "timeoutSeconds": 1,
+              "periodSeconds": 2,
+              "successThreshold": 1,
+              "failureThreshold": 1
+            },
+            "terminationMessagePath": "/dev/termination-log",
+            "terminationMessagePolicy": "File",
+            "imagePullPolicy": "IfNotPresent"
+          }
+        ],
+        "restartPolicy": "Always",
+        "terminationGracePeriodSeconds": 30,
+        "dnsPolicy": "ClusterFirst",
+        "serviceAccountName": "default",
+        "serviceAccount": "default",
+        "nodeName": "k8s-minion3",
+        "securityContext": {
+          
+        },
+        "schedulerName": "default-scheduler",
+        "tolerations": [
+          {
+            "key": "node.kubernetes.io/not-ready",
+            "operator": "Exists",
+            "effect": "NoExecute",
+            "tolerationSeconds": 300
+          },
+          {
+            "key": "node.kubernetes.io/unreachable",
+            "operator": "Exists",
+            "effect": "NoExecute",
+            "tolerationSeconds": 300
+          }
+        ]
+      },
+      "status": {
+        "phase": "Running",
+        "conditions": [
+          {
+            "type": "Initialized",
+            "status": "True",
+            "lastProbeTime": null,
+            "lastTransitionTime": "2018-02-21T22:05:13Z"
+          },
+          {
+            "type": "Ready",
+            "status": "True",
+            "lastProbeTime": null,
+            "lastTransitionTime": "2018-02-28T09:38:37Z"
+          },
+          {
+            "type": "PodScheduled",
+            "status": "True",
+            "lastProbeTime": null,
+            "lastTransitionTime": "2018-02-21T22:05:13Z"
+          }
+        ],
+        "hostIP": "192.168.11.4",
+        "podIP": "10.244.1.180",
+        "startTime": "2018-02-21T22:05:13Z",
+        "containerStatuses": [
+          {
+            "name": "k8s-test-microservice-container",
+            "state": {
+              "running": {
+                "startedAt": "2018-02-28T09:38:35Z"
+              }
+            },
+            "lastState": {
+              "terminated": {
+                "exitCode": 137,
+                "reason": "Error",
+                "startedAt": "2018-02-28T09:38:00Z",
+                "finishedAt": "2018-02-28T09:38:34Z",
+                "containerID": "docker://0551051be779944ef63571eb485b6551ab483bc45cd6140feba6c7948354254d"
+              }
+            },
+            "ready": true,
+            "restartCount": 2,
+            "image": "rilleralle/k8s-test-microservice-arm64:v1",
+            "imageID": "docker-pullable://rilleralle/k8s-test-microservice-arm64@sha256:2007e9399b499d7364f83f77421d7fc0ab910079669f1890963e338dcb6f6093",
+            "containerID": "docker://b9c5d3d4e6b0a60931a07e3821dd540321ffdccd16d6290532e2c3d111bb2930"
+          }
+        ],
+        "qosClass": "BestEffort"
+      }
+    }
+  ]
+}
