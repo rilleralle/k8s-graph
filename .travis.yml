@@ -1,0 +1,16 @@
+sudo: required
+language: node_js
+node_js:
+  - "node"
+  - "8"
+services:
+  - docker
+install:
+  - npm install
+script:
+  - npm test
+deploy:
+  provider: script
+  script: bash scripts/docker_push.sh
+  on:
+    branch: develop
