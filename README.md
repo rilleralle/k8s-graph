@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/rilleralle/k8s-graph.svg?branch=master)](https://travis-ci.org/rilleralle/k8s-graph)
+
 # Visualize Your Kubernetes Cluster
 ![Image](k8s-graph.png)
 
