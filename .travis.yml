@@ -1,7 +1,10 @@
+sudo: required
 language: node_js
 node_js:
   - "node"
   - "8"
+services:
+  - docker
 install:
   - npm install
 script:
