@@ -11,6 +11,6 @@ script:
   - npm test
 deploy:
   provider: script
-  script: bash docker_deploy.sh
+  script: bash scripts/docker_deploy.sh
   on:
     branch: develop
