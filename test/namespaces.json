@@ -1,0 +1,61 @@
+{
+  "kind": "NamespaceList",
+  "apiVersion": "v1",
+  "metadata": {
+    "selfLink": "/api/v1/namespaces/",
+    "resourceVersion": "1267981"
+  },
+  "items": [
+    {
+      "metadata": {
+        "name": "default",
+        "selfLink": "/api/v1/namespaces/default",
+        "uid": "e7f9e395-ffb0-11e7-bdb9-fe703acf5ad1",
+        "resourceVersion": "5",
+        "creationTimestamp": "2018-01-22T20:14:52Z"
+      },
+      "spec": {
+        "finalizers": [
+          "kubernetes"
+        ]
+      },
+      "status": {
+        "phase": "Active"
+      }
+    },
+    {
+      "metadata": {
+        "name": "kube-public",
+        "selfLink": "/api/v1/namespaces/kube-public",
+        "uid": "ea71571c-ffb0-11e7-bdb9-fe703acf5ad1",
+        "resourceVersion": "55",
+        "creationTimestamp": "2018-01-22T20:14:57Z"
+      },
+      "spec": {
+        "finalizers": [
+          "kubernetes"
+        ]
+      },
+      "status": {
+        "phase": "Active"
+      }
+    },
+    {
+      "metadata": {
+        "name": "kube-system",
+        "selfLink": "/api/v1/namespaces/kube-system",
+        "uid": "e7f0d8b6-ffb0-11e7-bdb9-fe703acf5ad1",
+        "resourceVersion": "4",
+        "creationTimestamp": "2018-01-22T20:14:52Z"
+      },
+      "spec": {
+        "finalizers": [
+          "kubernetes"
+        ]
+      },
+      "status": {
+        "phase": "Active"
+      }
+    }
+  ]
+}
