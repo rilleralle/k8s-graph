@@ -16,7 +16,7 @@ const svg = d3.select("svg"),
         .attr("class", "tooltip")
         .style("opacity", 0),
     simulation = d3.forceSimulation()
-        .force("center", d3.forceCenter(100, 300))
+        .force("center", d3.forceCenter(300, 300))
         .force("charge", d3.forceManyBody().strength(-750))
         .force("collide", d3.forceCollide((d) => d.size * 2))
         .force("link", d3.forceLink(links).id((d) => d.id).distance((d) => d.length))
@@ -242,4 +242,12 @@ function toggleTextVisibility() {
 
 function changeNamespace(namespace) {
     socket.emit("changeNamespace", namespace);
+}
+
+function openNav() {
+    document.getElementById("mySidenav").style.width = "250px";
+}
+
+function closeNav() {
+    document.getElementById("mySidenav").style.width = "0";
 }

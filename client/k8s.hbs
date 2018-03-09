@@ -7,23 +7,27 @@
 <meta charset="utf-8">
 
 <body>
-<div class="controlls">
-    <input type="checkbox" onclick="toggleStickyObjects()">
-    <span>Sticky objects</span>
-
-    <input type="checkbox" onclick="toggleTextVisibility()" checked="true">
-    <span>Text visible</span>
-
-    <br><br>
-
-    <span>Namespace</span>
-    <select id="namespaces" onchange="changeNamespace(this.value)">
-        {{#each namespaces}}
-            <option value="{{this}}">{{this}}</option>
-        {{/each}}
-    </select>
+<div id="mySidenav" class="sidenav">
+    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+    <p>
+        <input type="checkbox" onclick="toggleStickyObjects()">
+        <span>Sticky objects</span>
+    </p>
+    <p>
+        <input type="checkbox" onclick="toggleTextVisibility()" checked="true">
+        <span>Text visible</span>
+    </p>
+    <p>
+        <span>Namespace</span>
+        <select id="namespaces" onchange="changeNamespace(this.value)">
+            {{#each namespaces}}
+                <option value="{{this}}">{{this}}</option>
+            {{/each}}
+        </select>
+    </p>
 </div>
 
+<span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776;</span>
 <svg id="wrapper" width="100%" height="98%"></svg>
 
 <script src="/socket.io/socket.io.js"></script>
