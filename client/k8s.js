@@ -6,7 +6,7 @@ let textVisibility = true;
 // if true pod stroke with will be increased by number of restarts
 let isRestartStroke = false;
 
-const svg = d3.select("svg"),
+const svg = d3.select("#wrapper"),
     width = "100%",
     height = "100%",
     color = d3.scaleOrdinal(d3.schemeCategory10),
@@ -55,7 +55,13 @@ function restart() {
             }
         }))
         .attr("fill", function (d) {
-            return color(d.color);
+            if (d.type === "Node") {
+                return nodeColor(d.color);
+            } else if (d.type === "Master") {
+                return "#00f";
+            } else {
+                return color(d.color);
+            }
         })
         .attr("class", "node")
         .attr("stroke-width", function (d) {
@@ -245,9 +251,36 @@ function changeNamespace(namespace) {
 }
 
 function openNav() {
+    document.getElementById("pulse").classList.add('pulse');
+    document.getElementById("start").classList.add('start');
+    document.getElementById("delete").classList.add('delete');
+    document.getElementById("notReady").classList.add('notReady');
+
     document.getElementById("mySidenav").style.width = "250px";
 }
 
 function closeNav() {
     document.getElementById("mySidenav").style.width = "0";
+
+    document.getElementById("pulse").classList.remove('pulse');
+    document.getElementById("start").classList.remove('start');
+    document.getElementById("delete").classList.remove('delete');
+    document.getElementById("notReady").classList.remove('notReady');
+}
+
+function nodeColor(colorIdentifier) {
+    const containsNumber = /\d+/.test(colorIdentifier);
+    if (!containsNumber) {
+        return color(colorIdentifier);
+    }
+
+    let minionColors = [
+        "#000000",
+        "#008000",
+        "#ffff00",
+        "#fffff0",
+        "#ff0000"
+    ];
+    const number = /\d+$/.exec(colorIdentifier.toLowerCase());
+    return minionColors[number % minionColors.length];
 }

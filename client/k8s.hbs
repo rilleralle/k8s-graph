@@ -10,21 +10,75 @@
 <div id="mySidenav" class="sidenav">
     <div class="closebtn" onclick="closeNav()">&times;</div>
     <p>
-        <input type="checkbox" onclick="toggleStickyObjects()">
-        <span>Sticky objects</span>
+        <label>
+            <input type="checkbox" onclick="toggleStickyObjects()">
+            Sticky objects
+        </label>
     </p>
     <p>
-        <input type="checkbox" onclick="toggleTextVisibility()" checked="true">
-        <span>Text visible</span>
+        <label>
+            <input type="checkbox" onclick="toggleTextVisibility()" checked>
+            Text visible
+        </label>
     </p>
     <p>
-        <span>Namespace</span>
-        <select id="namespaces" onchange="changeNamespace(this.value)">
-            {{#each namespaces}}
-                <option value="{{this}}">{{this}}</option>
-            {{/each}}
-        </select>
+        <label>
+            Namespace
+            <select id="namespaces" onchange="changeNamespace(this.value)">
+                {{#each namespaces}}
+                    <option value="{{this}}">{{this}}</option>
+                {{/each}}
+            </select>
+        </label>
     </p>
+    <br>
+    <h1>Legend</h1>
+    <p>Shapes</p>
+    <p>
+        <svg height="25" width="25">
+            <polygon points="12.5,1.25 5,24.75 23.75,9.75 1.25,9.75 20,24.75"
+                     style="fill:white;fill-rule:nonzero;" ></polygon>
+        </svg>
+        Master
+    </p>
+    <p>
+        <svg height="25" width="25">
+            <rect x="0" y="0" width="25" height="25" style="fill:white" ></rect>
+        </svg>
+        Node
+    </p>
+    <p>
+        <svg height="25" width="25">
+            <circle cx="12.5" cy="12.5" r="12.5" fill="white" ></circle>
+        </svg>
+        Pod
+    </p>
+    <p>Animations</p>
+    <p>
+        <svg id="pulse" height="30" width="30">
+            <circle cx="15" cy="15" r="5" fill="white" ></circle>
+        </svg>
+        Error
+    </p>
+    <p>
+        <svg id="start" height="30" width="30">
+            <circle cx="15" cy="15" r="5" fill="white" ></circle>
+        </svg>
+        Start
+    </p>
+    <p>
+        <svg id="delete" height="30" width="30">
+            <circle cx="15" cy="15" r="5" fill="white" ></circle>
+        </svg>
+        Delete
+    </p>
+    <p>
+        <svg id="notReady" height="30" width="30">
+            <circle cx="15" cy="15" r="5" fill="white" ></circle>
+        </svg>
+        Not ready
+    </p>
+    <br><br>
 </div>
 
 <span class="navIcon" onclick="openNav()">&#9776;</span>
