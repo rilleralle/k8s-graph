@@ -114,11 +114,15 @@ module.exports = class Server {
                 .map((item) => item.restartCount)
                 .reduce((sum, value) => sum + value);
 
+            const imageName = item.spec.containers
+                .map((item) => item.image)
+                .reduce((imageNames, imageName) => imageNames + imageName);
+
             return {
                 id: item.metadata.name,
                 text: item.metadata.name,
                 size: this.podSize,
-                color: item.metadata.labels.app === undefined ? item.metadata.labels.run : item.metadata.labels.app,
+                color: imageName,
                 status: status,
                 type: "Pod",
                 restarts: restartCount,
