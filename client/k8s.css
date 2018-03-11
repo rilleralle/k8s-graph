@@ -99,7 +99,7 @@ div.tooltip {
     background-color: #111;
     overflow-x: hidden;
     transition: 0.2s;
-    padding-top: 60px;
+    padding-top: 30px;
 }
 
 .sidenav > * {
@@ -111,7 +111,7 @@ div.tooltip {
 }
 
 .sidenav p {
-    padding: 8px 8px 8px 32px;
+    padding: 0px 8px 0px 16px;
 }
 
 .sidenav div:hover {
