@@ -65,7 +65,7 @@ Create deployment
 $ kubectl apply -f k8s-graph.yaml
 ```
 ## RBAC
->With K8S 1.9.2 the default user does not have access to the API any more. Please create a service account that have read access for the endpoints `nodes` and `pods`. Use this account to execute the graph container.
+>With K8S 1.9.2 the default user does not have access to the API any more. Please create a service account that has read access for the endpoints `nodes` and `pods`. Use this account to execute the graph container.
 You can also bypass the RBAC by making the default user a cluster-admin.
 `Please be aware, that this could be a secutiry issue!`
 ```
