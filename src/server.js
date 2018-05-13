@@ -23,8 +23,13 @@ module.exports = class Server {
         this.pollingIntervalInSeconds = this.getEnvVar('pollingIntervalInSeconds', 1);
 
         this.namespace = "default";
+        // raw api call result from pod endpoint
         this.podsResult;
+        // raw api call result from nodes endpoint
         this.nodesResult;
+        // raw api call result from namespace endpoint
+        this.namespaceResult;
+        // list of available namespaces in k8s
         this.namespaces;
 
         let K8sApiFetcher = require('./k8sApiFetcher');
@@ -194,6 +199,7 @@ module.exports = class Server {
      */
     fetchNamespaces() {
         this.namespaceFetcher.fetch().then(result => {
+            this.namespaceResult = result;
             this.namespaces = result.items.map((item) => item.metadata.name);
         }).catch(error => {
             this.handleError(error);
@@ -228,6 +234,10 @@ module.exports = class Server {
      */
     handleError(errorMessage) {
         console.error(errorMessage);
-        this.io.emit('error', errorMessage);
+        this.io.emit('error',
+            `error: ${errorMessage.message}\n` +
+            `nodesResult: ${JSON.stringify(this.nodesResult)}\n` +
+            `podsResult: ${JSON.stringify(this.podsResult)}\n` +
+            `namespaceResult: ${JSON.stringify(this.namespaceResult)}\n`);
     }
 };
