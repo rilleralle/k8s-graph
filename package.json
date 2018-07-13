@@ -2,10 +2,10 @@
   "name": "k8s-graph",
   "version": "0.0.1",
   "dependencies": {
-    "express": "4.15.3",
+    "express": "^4.16.3",
     "express-hbs": "^1.0.4",
     "http": "0.0.0",
-    "socket.io": "2.0.3",
+    "socket.io": "^2.1.1",
     "socket.io-client": "2.0.3"
   },
   "devDependencies": {
@@ -16,6 +16,7 @@
     "sinon": "^4.4.2"
   },
   "scripts": {
-    "test": "mocha './**/*.spec.js'"
+    "test": "mocha './**/*.spec.js'",
+    "start": "node index.js"
   }
 }
